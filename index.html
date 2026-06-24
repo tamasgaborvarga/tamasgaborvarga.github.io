@@ -1,470 +1,334 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tamás Gábor Varga — Process Engineer → Business Analyst / Product Owner</title>
-<meta name="description" content="Tamás Gábor Varga — process engineer moving toward a Business Analyst / Product Owner role. Engineering analytics meets a business and product mindset." />
-<meta name="color-scheme" content="light" />
-<meta name="theme-color" content="#f7f8fa" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Tamás Gábor Varga — Process Engineer → Business Analyst / Product Owner" />
-<meta property="og:description" content="Process engineer moving toward Business Analyst / Product Owner. Engineering analytics meets a business and product mindset." />
-<meta property="og:url" content="https://tamasgaborvarga.github.io/" />
-<meta property="og:image" content="https://tamasgaborvarga.github.io/og-image.png" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://tamasgaborvarga.github.io/og-image.png" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holdudvar Vendégház Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="records.js"></script>
+<script src="apartments.js"></script>
 <style>
-  :root {
-    --bg: #f7f8fa;
-    --bg-soft: #ffffff;
-    --card: #ffffff;
-    --border: #e3e7ee;
-    --text: #16181d;
-    --muted: #646874;
-    --accent: #16181d;
-    --accent-soft: rgba(22, 24, 29, 0.05);
-    --accent-text: #ffffff;
-    --primary-hover: #34373f;
-    --nav-bg: rgba(247, 248, 250, 0.85);
-    --glow: rgba(22, 24, 29, 0.06);
-    --shot-1: #eef1f7;
-    --shot-2: #e3e8f2;
-    --shadow: rgba(26, 34, 51, 0.08);
-    --max: 980px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    transition: background .3s ease, color .3s ease;
-  }
-
-  h1, h2, h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; line-height: 1.2; }
-
-  a { color: inherit; text-decoration: none; }
-
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-  .card a:focus-visible, .btn:focus-visible, .contact-card:focus-visible { outline-offset: 4px; }
-
-  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-
-  section { padding: 84px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 80px; }
-  #contact { border-bottom: none; }
-
-  .sec-head { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
-  .sec-head .eyebrow { margin-bottom: 0; }
-  .sec-icon {
-    flex: none;
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 40px; height: 40px; border-radius: 11px;
-    background: var(--accent-soft); color: var(--accent);
-    border: 1px solid var(--border);
-  }
-  .eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 18px;
-  }
-
-  h2 + .lead-para { margin-top: 18px; }
-
-  /* NAV */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
-  nav .brand { font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; letter-spacing: 0.01em; }
-  nav .links { display: flex; gap: 28px; }
-  nav .links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
-  nav .links a:hover, nav .links a.active { color: var(--text); }
-  @media (max-width: 640px) { nav .links { display: none; } }
-
-  /* HERO */
-  .hero { padding: 110px 0 96px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -200px; right: -160px;
-    width: 520px; height: 520px;
-    background: radial-gradient(circle, var(--glow), transparent 65%);
-    pointer-events: none;
-  }
-  .hero .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 26px; }
-  .hero .status {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--muted);
-    border: 1px solid var(--border); border-radius: 999px;
-    padding: 6px 14px; background: var(--bg-soft);
-  }
-  .hero .loc { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
-  .hero .loc svg { opacity: 0.8; }
-  .hero .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #36d399; box-shadow: 0 0 0 3px rgba(54,211,153,0.18); }
-  .hero h1 { font-size: clamp(36px, 6vw, 58px); font-weight: 800; letter-spacing: -0.02em; }
-  .hero .subtitle {
-    font-family: 'Space Grotesk';
-    font-size: clamp(17px, 2.6vw, 22px);
-    color: var(--accent);
-    margin-top: 14px; font-weight: 600;
-  }
-  .hero p.lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-top: 22px; }
-  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    border: 1px solid var(--border); transition: border-color .2s, background .2s, transform .2s; background: var(--card);
-  }
-  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
-  .btn.primary:hover { background: var(--primary-hover); }
-
-  /* SKILLS */
-  .lead-para { color: var(--muted); font-size: 17px; max-width: 680px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-  .tag {
-    font-size: 14px; font-weight: 500;
-    padding: 9px 16px; border-radius: 999px;
-    background: var(--accent-soft); border: 1px solid var(--border); color: var(--text);
-  }
-
-  /* PROJECTS */
-  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
-  @media (max-width: 860px) { .cards { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 540px) { .cards { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s, box-shadow .2s;
-  }
-  .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 30px var(--shadow); }
-  .card .shot {
-    position: relative;
-    height: 150px; background: linear-gradient(135deg, var(--shot-1), var(--shot-2));
-    display: flex; align-items: center; justify-content: center;
-    border-bottom: 1px solid var(--border);
-    overflow: hidden;
-    filter: brightness(0.84);
-    transition: filter .35s ease;
-  }
-  .card:hover .shot,
-  .card:active .shot,
-  .card:focus-within .shot { filter: brightness(1); }
-  .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  /* slow zoom on hover — applies to any cover content (img, svg, brand tile) on every card */
-  .card .shot > :not(.year-badge) { transition: transform .45s ease; transform-origin: center; }
-  .card:hover .shot > :not(.year-badge),
-  .card:active .shot > :not(.year-badge),
-  .card:focus-within .shot > :not(.year-badge) { transform: scale(1.05); }
-  .card .shot-brand {
-    background: linear-gradient(135deg, #ff5a18, #f84500);
-  }
-  .card .brand-cover {
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 27px;
-    color: #fff; letter-spacing: 0.005em;
-  }
-  .card .year-badge {
-    position: absolute; top: 9px; right: 10px; z-index: 1;
-    font-family: 'Space Grotesk'; font-size: 11px; font-weight: 500; letter-spacing: 0.03em;
-    color: rgba(255, 255, 255, 0.92); padding: 2px 8px; border-radius: 6px;
-    background: rgba(16, 18, 23, 0.42); backdrop-filter: blur(4px);
-  }
-  .card .body { padding: 13px 14px 14px; flex: 1; display: flex; flex-direction: column; }
-  .card h3 { font-size: 15px; }
-  .card p { color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 7px; flex: 1; }
-  .card .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
-  .card .meta span { font-size: 10px; color: var(--muted); border: 1px solid var(--border); padding: 2px 7px; border-radius: 5px; }
-  .card .card-link { margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
-  .card .card-link.muted { color: var(--muted); }
-
-  /* EXPERIENCE */
-  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 30px; }
-  .tl-item { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--border); }
-  .tl-item:first-child { border-top: none; }
-  .tl-item .when { color: var(--muted); font-size: 14px; font-family: 'Space Grotesk'; font-weight: 600; }
-  .tl-item .role { font-weight: 600; font-size: 17px; }
-  .tl-item .org { color: var(--muted); font-size: 15px; margin-top: 2px; }
-  @media (max-width: 560px) { .tl-item { grid-template-columns: 1fr; gap: 4px; } }
-
-  /* CONTACT */
-  .contact-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
-  .contact-card {
-    flex: 1; min-width: 220px;
-    display: flex; align-items: center; gap: 16px;
-    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-    padding: 20px 22px; transition: border-color .2s;
-  }
-  .contact-card:hover { border-color: var(--accent); }
-  .contact-card .c-icon {
-    flex: none;
-    width: 44px; height: 44px; border-radius: 11px;
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--accent-soft); color: var(--accent);
-    border: 1px solid var(--border);
-    transition: background .2s, color .2s, border-color .2s;
-  }
-  .contact-card:hover .c-icon { border-color: var(--accent); }
-  .contact-card:hover .c-icon { background: var(--accent); color: var(--accent-text); }
-  .contact-card .c-text { display: flex; flex-direction: column; min-width: 0; }
-  .contact-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
-  .contact-card .val { font-size: 16px; font-weight: 600; margin-top: 4px; word-break: break-word; }
-
-  footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; animation: none !important; }
-    .card:hover, .btn:hover { transform: none; }
-    /* keep the gentle cover zoom + brighten as a deliberate hover affordance */
-    .card .shot { transition: filter .35s ease !important; }
-    .card .shot > :not(.year-badge) { transition: transform .45s ease !important; }
-  }
+  :root{--bg:#F7F5F1;--card:#FFFFFF;--ink:#21302E;--muted:#71807D;--teal:#1F5F60;--teal-soft:#3E8487;--terra:#C8794A;--line:#E8E3DA;--up:#2E7D5B;--down:#B3543C}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:34px 22px 64px}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-soft);font-weight:600}
+  h1{font-family:Fraunces,serif;font-weight:600;font-size:34px;margin:4px 0 8px;letter-spacing:-.015em}
+  .lede{font-size:14px;color:var(--muted);margin:0 0 14px}
+  .insight{font-size:15px;line-height:1.6;color:#3B4A48;max-width:780px;margin:0}
+  .insight b{color:var(--ink)}
+  .seg{display:inline-flex;background:#EFece5;border-radius:9px;padding:3px}
+  .seg button{padding:6px 12px;border-radius:7px;font-size:13px;cursor:pointer;color:var(--muted);border:0;background:transparent}
+  .seg button.active{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08);font-weight:600}
+  .langseg button{padding:5px 10px;font-size:12px}
+  .controls{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin:24px 0 6px;padding:12px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  .cgroup{display:flex;align-items:center;gap:8px}
+  .lbl-sm{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--ink);padding:6px 11px;border-radius:999px;font-size:13px;font-weight:500;cursor:pointer;transition:.15s;user-select:none}
+  .chip.off{opacity:.35}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 18px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+  .kpi .lbl{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .kpi .val{font-family:Fraunces,serif;font-size:25px;font-weight:600;margin-top:6px;line-height:1.1}
+  .kpi .delta{font-size:12px;margin-top:6px;font-weight:600}
+  .kpi .delta .ctx{color:var(--muted);font-weight:400}
+  .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--muted)}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+  .panel .ph{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+  .panel h3{margin:0;font-size:15px;font-weight:600}
+  .panel .hint{font-size:12px;color:var(--muted);margin:0 0 12px}
+  .row{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+  .chartbox{position:relative}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);margin-top:10px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+  footer{margin-top:26px;font-size:12px;color:var(--muted)}
+  @media(max-width:820px){.kpis{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr}h1{font-size:27px}}
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="wrap">
-    <a class="brand" href="#">Tamás Gábor Varga</a>
-    <div class="links">
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1>Holdudvar Vendégház Analytics</h1>
+      <p class="lede" id="lede"></p>
+    </div>
+    <div class="seg langseg" id="langseg">
+      <button data-l="en">EN</button><button data-l="hu">HU</button>
     </div>
   </div>
-</nav>
+  <p class="insight" id="insight"></p>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="wrap">
-    <div class="hero-meta">
-      <span class="status"><span class="dot"></span> Open to new opportunities</span>
-      <span class="loc">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        Budapest, Hungary
-      </span>
-    </div>
-    <h1>Tamás Gábor Varga</h1>
-    <div class="subtitle">Process Engineer → Business Analyst / Product Owner</div>
-    <p class="lead">
-      Process engineer with 4+ years in manufacturing, now moving toward a business- and
-      product-focused role. I pair analytical, engineering thinking with a business and
-      product mindset.
-    </p>
-    <div class="btns">
-      <a class="btn primary" href="mailto:vtamasgabor@gmail.com">Email</a>
-      <a class="btn" href="https://www.linkedin.com/in/vargatamasgabor/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="cv.pdf" download="varga_tamas_gabor_resume.pdf">CV</a>
-    </div>
-  </div>
-</header>
-
-<!-- ABOUT / SKILLS -->
-<section id="about">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span><p class="eyebrow">About</p></div>
-    <h2>Engineering analytics, product mindset</h2>
-    <p class="lead-para">
-      I come from optimizing manufacturing processes — that's where I learned to start from
-      data, understand the real problem, find the root cause, and ship a measurable solution.
-      I'm now bringing that structured, analytical approach into the product world, where user
-      needs, business value, and feasibility meet.
-    </p>
-    <div class="tags">
-      <span class="tag">Process Optimization</span>
-      <span class="tag">Data Analysis</span>
-      <span class="tag">SAP</span>
-      <span class="tag">Product Thinking</span>
-      <span class="tag">Agile / Scrum</span>
-      <span class="tag">Stakeholder Communication</span>
-      <span class="tag">AI &amp; Prompt Engineering</span>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><p class="eyebrow">Projects</p></div>
-    <h2>Built outside of work</h2>
-    <p class="lead-para">For the fun of it — and to keep learning by building.</p>
-    <div class="cards">
-
-      <article class="card">
-        <div class="shot" style="background:linear-gradient(135deg,#1f2329,#2b3138)">
-          <span class="year-badge">2026</span>
-          <svg viewBox="0 0 200 150" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="display:block">
-            <g stroke="rgba(255,255,255,0.16)" stroke-width="1"><line x1="20" y1="118" x2="180" y2="118"/><line x1="20" y1="88" x2="180" y2="88"/><line x1="20" y1="58" x2="180" y2="58"/></g>
-            <g fill="rgba(255,255,255,0.9)"><rect x="34" y="92" width="16" height="26" rx="2"/><rect x="62" y="70" width="16" height="48" rx="2"/><rect x="90" y="44" width="16" height="74" rx="2"/><rect x="118" y="80" width="16" height="38" rx="2"/><rect x="146" y="60" width="16" height="58" rx="2"/></g>
-            <polyline points="42,86 70,64 98,40 126,74 154,54" fill="none" stroke="#2f9e78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="body">
-          <h3>Job Search Analytics</h3>
-          <p>
-            I treated my own career transition like a business problem — tracking, measuring
-            and visualizing every application in a clean, honest analytics dashboard.
-          </p>
-          <div class="meta">
-            <span>Data Visualization</span><span>Vanilla JS</span><span>Chart.js</span><span>Product Thinking</span>
-          </div>
-          <a class="card-link" href="https://job-search-analytics.vtamasgabor.workers.dev/" target="_blank" rel="noopener">View →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="shot"><span class="year-badge">2026</span><img src="worldcup.jpg" alt="World Cup 2026 trophy" loading="lazy" /></div>
-        <div class="body">
-          <h3>World Cup Tipping Game Dashboard</h3>
-          <p>
-            A live dashboard visualizing a 63-player World Cup tipping game, with Monte Carlo
-            odds for each final position.
-          </p>
-          <div class="meta">
-            <span>Data Visualization</span><span>Monte Carlo Simulation</span><span>Statistical Modeling</span><span>Serverless</span>
-          </div>
-          <a class="card-link" href="https://zollner-2026-vb.vtamasgabor.workers.dev" target="_blank" rel="noopener">View →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="shot shot-brand"><span class="year-badge">2026</span><span class="brand-cover">BP Hoops</span></div>
-        <div class="body">
-          <h3>BP Hoops</h3>
-          <p>
-            A community PWA that maps Budapest's basketball courts and organizes pickup games.
-          </p>
-          <div class="meta">
-            <span>Vanilla JS</span><span>Supabase</span><span>Leaflet</span><span>PWA</span>
-          </div>
-          <a class="card-link" href="https://bphoops.hu" target="_blank" rel="noopener">View →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="shot"><span class="year-badge">2020 –</span><img src="holdudvar.jpg" alt="Holdudvar Vendégház — courtyard and garden" loading="lazy" /></div>
-        <div class="body">
-          <h3>Holdudvar Vendégház</h3>
-          <p>
-            A family-run guesthouse in Tiszafüred that I co-own and designed and built the
-            website for.
-          </p>
-          <div class="meta">
-            <span>Co-owner</span><span>Web Development</span><span>UX / Branding</span><span>HTML / CSS / JS</span>
-          </div>
-          <span class="card-link muted">Coming soon</span>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><p class="eyebrow">Experience</p></div>
-    <h2>Background</h2>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="when">2025 – 2026</div>
-        <div>
-          <div class="role">Process Engineer</div>
-          <div class="org">Zollner Elektronik</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="when">2021 – 2024</div>
-        <div>
-          <div class="role">Process Engineer</div>
-          <div class="org">Samsung SDI Hungary</div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="when">2017 – 2021</div>
-        <div>
-          <div class="role">BSc, Engineering &amp; Industrial Management</div>
-          <div class="org">Óbuda University</div>
-        </div>
+  <div class="controls">
+    <div class="cgroup"><span class="lbl-sm" id="lblMetric"></span>
+      <div class="seg">
+        <button class="mt active" data-m="nights"></button>
+        <button class="mt" data-m="count"></button>
       </div>
     </div>
+    <div class="cgroup"><span class="lbl-sm" id="lblSeasons"></span><span id="yearChips" style="display:flex;gap:6px;flex-wrap:wrap"></span></div>
   </div>
-</section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="wrap">
-    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span><p class="eyebrow">Contact</p></div>
-    <h2>Let's talk</h2>
-    <p class="lead-para">I'm available for new opportunities and conversations.</p>
-    <div class="contact-grid">
-      <a class="contact-card" href="mailto:vtamasgabor@gmail.com">
-        <span class="c-icon">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
-        </span>
-        <span class="c-text">
-          <span class="label">Email</span>
-          <span class="val">vtamasgabor@gmail.com</span>
-        </span>
-      </a>
-      <a class="contact-card" href="https://www.linkedin.com/in/vargatamasgabor/" target="_blank" rel="noopener">
-        <span class="c-icon">
-          <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
-        </span>
-        <span class="c-text">
-          <span class="label">LinkedIn</span>
-          <span class="val">linkedin.com/in/vargatamasgabor</span>
-        </span>
-      </a>
+  <div class="kpis" id="kpis"></div>
+
+  <div class="panel">
+    <div class="ph"><h3 id="heroTitle"></h3><span class="lbl-sm" id="heroMetric"></span></div>
+    <p class="hint" id="heroHint"></p>
+    <div class="chartbox" style="height:400px"><canvas id="hero"></canvas></div>
+  </div>
+
+  <div class="row">
+    <div class="panel">
+      <div class="ph"><h3 id="mixTitle"></h3></div>
+      <p class="hint" id="mixHint"></p>
+      <div class="chartbox" style="height:230px"><canvas id="mix"></canvas></div>
+      <div class="legend" id="mixLegend"></div>
+    </div>
+    <div class="panel">
+      <div class="ph"><h3 id="secTitle"></h3></div>
+      <p class="hint" id="secHint"></p>
+      <div class="chartbox" style="height:230px"><canvas id="sec"></canvas></div>
     </div>
   </div>
-</section>
 
-<footer>
-  <div class="wrap">© 2026 Tamás Gábor Varga</div>
-</footer>
+  <div class="panel">
+    <div class="ph"><h3 id="profTitle"></h3></div>
+    <p class="hint" id="profHint"></p>
+    <div class="chartbox" style="height:210px"><canvas id="prof"></canvas></div>
+    <div class="legend" id="profLegend"></div>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3 id="occTitle"></h3></div>
+    <p class="hint" id="occHint"></p>
+    <div id="occGrid" style="display:grid;gap:4px"></div>
+    <div id="occScale" style="margin-top:10px"></div>
+    <p class="hint" id="occNote" style="margin-top:12px"></p>
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h3 id="aptTitle"></h3></div>
+    <p class="hint" id="aptHint"></p>
+    <div class="chartbox" style="height:210px"><canvas id="aptChart"></canvas></div>
+    <p class="hint" id="aptNote" style="margin-top:12px"></p>
+  </div>
+
+  <footer id="footer"></footer>
+</div>
 
 <script>
-  (function () {
-    // Scrollspy — highlight the nav link of the section in view
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav .links a'));
-    var watched = navLinks
-      .map(function (l) { return { link: l, sec: document.getElementById(l.getAttribute('href').slice(1)) }; })
-      .filter(function (o) { return o.sec; });
-    if ('IntersectionObserver' in window && watched.length) {
-      var obs = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            navLinks.forEach(function (l) { l.classList.remove('active'); });
-            var hit = watched.filter(function (o) { return o.sec === e.target; })[0];
-            if (hit) hit.link.classList.add('active');
-          }
-        });
-      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-      watched.forEach(function (o) { obs.observe(o.sec); });
-    }
-  })();
-</script>
+const DATA=(window.HOLDUDVAR_DATA||[]);
+const YEARS=[...new Set(DATA.map(b=>b.ev))].sort();
+const MN=[3,4,5,6,7,8,9,10];
+const YCOL={2021:'#9C9C9C',2022:'#B8923A',2023:'#7B6CA8',2024:'#4F86B0',2025:'#CC5B4C',2026:'#4E8C5A'};
+const TEAL='#1F5F60', TERRA='#C8794A';
 
+const T={
+  en:{
+    eyebrow:'Hospitality analytics · self-collected data',
+    lede:'Our guesthouse’s booking data · 2021–2026',
+    metric:'Metric', seasons:'Seasons', mNights:'Guest-nights', mBookings:'Bookings',
+    months:{3:'Mar',4:'Apr',5:'May',6:'Jun',7:'Jul',8:'Aug',9:'Sep',10:'Oct'},
+    mname:{nights:'Guest-nights',count:'Bookings'}, mlow:{nights:'guest-nights',count:'bookings'},
+    peak:'PEAK SEASON', perMonth:'/ month', like:'like months',
+    kpiBookings:'Bookings', kpiNights:'Guest-nights', kpiLOS:'Avg length of stay', kpiDirect:'Direct share', unitNights:'nights',
+    heroTitle:'Seasonal comparison',
+    heroHint:'Each line is one season. Overlaying the months shows where and how much demand differs year over year — the grey band marks peak season (Jul–Aug).',
+    mixTitle:'Channel mix by season',
+    mixHint:'Direct vs. Szállás.hu (OTA) share each year. Direct bookings carry no commission — a higher share protects margin.',
+    direct:'Direct', ota:'Szállás.hu (OTA)',
+    secTitle:'Average length of stay', secHint:'Guest-nights per booking, by season.', tipNights:'nights',
+    profTitle:'Who books each channel?',
+    profHint:'Direct guests book larger groups and are far more likely to rent the whole house; the OTA channel (Szállás.hu) skews to couples. So direct demand is valuable beyond the saved commission — it brings the highest-value booking type.',
+    wholeTip:p=>'Whole-house: '+p+'% of bookings', wholeAxis:'Whole-house share of bookings',
+    avgGroup:(d,o)=>`Avg group · Direct <b>${d}</b> vs OTA <b>${o}</b> guests`,
+    insight:(pk,lo,peakY,peakC,lastY,lastC,dH,dHY)=>`Six seasons of self-collected booking data. <b>Peak season (Jul–Aug)</b> drives <b>${pk}%</b> of ${lo}. Booking volume peaked in ${peakY} (${peakC}) and has softened since (${lastC} in ${lastY}), while the <b>direct</b> share reached its high of <b>${dH}%</b> in ${dHY} — the lever that protects margin.`,
+    occTitle:'Occupancy by month & season',
+    occHint:'Apartment-nights booked ÷ capacity (3 apartments × days in month). Self-derived from booking records.',
+    occNote:'Peak months (Jul–Aug) run near 70–80% — close to full. The shoulder months (May, Sep, Oct) are the real headroom for growth. *2026 is a partial season.',
+    aptTitle:'Occupancy by apartment',
+    aptHint:'Each apartment’s season occupancy over the selected years (2022–2026; 2021 has no apartment-level data). Capacity: Telihold & Félhold 2–4 guests, Holdfény 4–6.',
+    aptNote:'The largest unit (Holdfény) is the least filled — demand skews to the smaller apartments and to couples; Holdfény mostly fills as part of whole-house bookings.',
+    footer:'Built by Tamás Gábor Varga · vanilla JS + Chart.js · data self-collected 2021–2026 (2026 partial).'
+  },
+  hu:{
+    eyebrow:'Vendéglátás-analitika · saját gyűjtésű adat',
+    lede:'A vendégházunk foglalási adatai · 2021–2026',
+    metric:'Mutató', seasons:'Szezonok', mNights:'Vendégéjszaka', mBookings:'Foglalás',
+    months:{3:'Márc',4:'Ápr',5:'Máj',6:'Jún',7:'Júl',8:'Aug',9:'Szep',10:'Okt'},
+    mname:{nights:'Vendégéjszaka',count:'Foglalás'}, mlow:{nights:'vendégéjszaka',count:'foglalás'},
+    peak:'CSÚCSSZEZON', perMonth:'/ hónap', like:'azonos hónapok',
+    kpiBookings:'Foglalás', kpiNights:'Vendégéjszaka', kpiLOS:'Átlagos tartózkodás', kpiDirect:'Direkt arány', unitNights:'éj',
+    heroTitle:'Szezonális összehasonlítás',
+    heroHint:'Minden vonal egy szezon. A hónapok egymásra vetítve mutatják, hol és mekkora az eltérés év/év — a szürke sáv a csúcsszezon (júl–aug).',
+    mixTitle:'Csatorna-mix szezononként',
+    mixHint:'Direkt vs. Szállás.hu (OTA) arány évről évre. A direkt foglalás jutalékmentes — minél magasabb, annál jobb a margó.',
+    direct:'Direkt', ota:'Szállás.hu (OTA)',
+    secTitle:'Átlagos tartózkodási idő', secHint:'Vendégéjszaka / foglalás, szezononként.', tipNights:'éj',
+    profTitle:'Ki melyik csatornán foglal?',
+    profHint:'A direkt vendégek nagyobb csoportban érkeznek, és sokkal gyakrabban bérlik az egész házat; az OTA (Szállás.hu) inkább a párokat hozza. A direkt kereslet a jutalékon túl is értékes — a legértékesebb foglalástípust hozza.',
+    wholeTip:p=>'Egész ház: '+p+'% a foglalásokból', wholeAxis:'Egész-ház arány a foglalásokból',
+    avgGroup:(d,o)=>`Átlag csoport · Direkt <b>${d}</b> vs OTA <b>${o}</b> fő`,
+    insight:(pk,lo,peakY,peakC,lastY,lastC,dH,dHY)=>`Hat szezon saját gyűjtésű foglalási adata. A <b>csúcsszezon (júl–aug)</b> a ${lo} <b>${pk}%</b>-át adja. A foglalási volumen ${peakY}-ban tetőzött (${peakC}), azóta csökkent (${lastC} ${lastY}-ben), miközben a <b>direkt</b> arány ${dHY}-ben érte el a csúcsát (<b>${dH}%</b>) — ez védi a margót.`,
+    occTitle:'Kihasználtság hónap és szezon szerint',
+    occHint:'Lefoglalt apartman-éjszaka ÷ kapacitás (3 apartman × hónap napjai). Saját számítás a foglalásokból.',
+    occNote:'A csúcshónapok (júl–aug) ~70–80% — közel teltház. A növekedés tartaléka a holtszezon (máj, szep, okt). *A 2026 részleges szezon.',
+    aptTitle:'Kihasználtság apartmanonként',
+    aptHint:'Az egyes apartmanok szezon-kihasználtsága a kiválasztott években (2022–2026; 2021-re nincs apartman-szintű adat). Kapacitás: Telihold és Félhold 2–4 fő, Holdfény 4–6 fő.',
+    aptNote:'A legnagyobb egység (Holdfény) telik a legkevésbé — a kereslet a kisebb apartmanok és a párok felé húz; a Holdfény főleg egész-házas foglalással telik meg.',
+    footer:'Készítette: Varga Tamás Gábor · vanilla JS + Chart.js · saját gyűjtésű adat 2021–2026 (2026 részleges).'
+  }
+};
+
+let lang=localStorage.getItem('holdudvar_lang')||'en';
+let metric='nights', enabled=new Set(YEARS), hero,mix,sec,prof,apt;
+const tr=()=>T[lang];
+const sum=(a,f)=>a.reduce((s,b)=>s+f(b),0);
+const NI=b=>b.nights;
+const mval=rows=> metric==='count'?rows.length : sum(rows,NI);
+const activeMonths=y=>MN.filter(m=>DATA.some(b=>b.ev===y&&b.honap===m));
+const rowsYM=(y,ms)=>DATA.filter(b=>b.ev===y&&ms.includes(b.honap));
+const DAYS={3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31};
+const occ=(y,m)=>{const cap=3*DAYS[m];const an=DATA.filter(b=>b.ev===y&&b.honap===m).reduce((s,b)=>s+b.nights*b.aptn,0);return cap?an/cap*100:0;};
+const lerp=(a,b,t)=>Math.round(a+(b-a)*t);
+const occColor=p=>{const t=Math.min(p,100)/100;return `rgb(${lerp(242,31,t)},${lerp(239,95,t)},${lerp(234,96,t)})`;};
+function buildOcc(){const t=tr();
+  document.getElementById('occTitle').textContent=t.occTitle;
+  document.getElementById('occHint').textContent=t.occHint;
+  document.getElementById('occNote').textContent=t.occNote;
+  const ys=YEARS.filter(y=>enabled.has(y));
+  const g=document.getElementById('occGrid');
+  g.style.gridTemplateColumns=`46px repeat(${MN.length},1fr)`;
+  let html=`<div></div>`+MN.map(m=>`<div style="text-align:center;font-size:11px;color:var(--muted)">${t.months[m]}</div>`).join('');
+  for(const y of ys){html+=`<div style="font-size:12px;color:var(--muted);display:flex;align-items:center">${y}${y===2026?'*':''}</div>`;
+    html+=MN.map(m=>{const p=Math.round(occ(y,m));const tc=p>45?'#fff':'#42514E';
+      return `<div title="${y} ${t.months[m]}: ${p}%" style="background:${occColor(p)};color:${tc};border-radius:6px;padding:9px 0;text-align:center;font-size:12px;font-weight:600">${p}%</div>`;}).join('');
+  }
+  g.innerHTML=html;
+  document.getElementById('occScale').innerHTML=`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)"><span>0%</span><span style="flex:1;max-width:200px;height:9px;border-radius:5px;background:linear-gradient(90deg,${occColor(0)},${occColor(50)},${occColor(100)})"></span><span>100%</span></div>`;
+}
+
+const peakBand={id:'peakBand',beforeDatasetsDraw(c){const{ctx,chartArea:a,scales:{x}}=c;if(!x)return;
+  const J=tr().months[7],A=tr().months[8];const x1=x.getPixelForValue(J),x2=x.getPixelForValue(A);
+  const l=Math.min(x1,x2)-x.width/14,r=Math.max(x1,x2)+x.width/14;
+  ctx.save();ctx.fillStyle='rgba(33,48,46,.045)';ctx.fillRect(l,a.top,r-l,a.bottom-a.top);
+  ctx.fillStyle='rgba(33,48,46,.30)';ctx.font='600 10px Inter';ctx.fillText(tr().peak,l+6,a.top+13);ctx.restore();}};
+
+function deltaHTML(cur,prev,opts={}){
+  if(prev==null||prev===0){return `<span class="flat">— <span class="ctx">${opts.ctx||''}</span></span>`;}
+  if(opts.pp!=null){const d=opts.pp;const cls=d>0.5?'up':d<-0.5?'down':'flat';const ar=d>0.5?'▲':d<-0.5?'▼':'▬';
+    return `<span class="${cls}">${ar} ${d>0?'+':''}${d.toFixed(0)} pp <span class="ctx">${opts.ctx||''}</span></span>`;}
+  const p=(cur-prev)/prev*100;const cls=p>1?'up':p<-1?'down':'flat';const ar=p>1?'▲':p<-1?'▼':'▬';
+  return `<span class="${cls}">${ar} ${p>0?'+':''}${p.toFixed(0)}% <span class="ctx">${opts.ctx||''}</span></span>`;
+}
+
+function applyStatic(){
+  const t=tr();
+  document.documentElement.lang=lang;
+  document.getElementById('eyebrow').textContent=t.eyebrow;
+  document.getElementById('lede').textContent=t.lede;
+  document.getElementById('lblMetric').textContent=t.metric;
+  document.getElementById('lblSeasons').textContent=t.seasons;
+  document.querySelector('.mt[data-m="nights"]').textContent=t.mNights;
+  document.querySelector('.mt[data-m="count"]').textContent=t.mBookings;
+  document.getElementById('heroTitle').textContent=t.heroTitle;
+  document.getElementById('heroHint').textContent=t.heroHint;
+  document.getElementById('mixTitle').textContent=t.mixTitle;
+  document.getElementById('mixHint').textContent=t.mixHint;
+  document.getElementById('mixLegend').innerHTML=`<span><span class="dot" style="background:#1F5F60"></span>${t.direct}</span><span><span class="dot" style="background:#C8794A"></span>${t.ota}</span>`;
+  document.getElementById('secTitle').textContent=t.secTitle;
+  document.getElementById('secHint').textContent=t.secHint;
+  document.getElementById('profTitle').textContent=t.profTitle;
+  document.getElementById('profHint').textContent=t.profHint;
+  document.getElementById('footer').textContent=t.footer;
+  document.querySelectorAll('#langseg button').forEach(b=>b.classList.toggle('active',b.dataset.l===lang));
+  document.getElementById('aptTitle').textContent=tr().aptTitle;
+  document.getElementById('aptHint').textContent=tr().aptHint;
+  document.getElementById('aptNote').textContent=tr().aptNote;
+}
+
+function render(){
+  const t=tr();
+  const on=YEARS.filter(y=>enabled.has(y));
+  const fy=on.length?Math.max(...on):YEARS[YEARS.length-1];
+  const py=fy-1, ms=activeMonths(fy);
+  const cur=rowsYM(fy,ms), prev=DATA.some(b=>b.ev===py)?rowsYM(py,ms):null;
+  const ctx=`${fy} vs ${py}${ms.length<8?' ('+t.like+')':''}`;
+  const ni=sum(cur,NI), pni=prev?sum(prev,NI):null;
+  const bk=cur.length, pbk=prev?prev.length:null;
+  const los=bk?ni/bk:0, plos=(prev&&pbk)?pni/pbk:null;
+  const dsh=bk?cur.filter(b=>b.csatorna==='Privát').length/bk*100:0;
+  const pdsh=(prev&&pbk)?prev.filter(b=>b.csatorna==='Privát').length/pbk*100:null;
+  document.getElementById('kpis').innerHTML=`
+    <div class="kpi"><div class="lbl">${t.kpiBookings} · ${fy}</div><div class="val">${bk}</div><div class="delta">${deltaHTML(bk,pbk,{ctx})}</div></div>
+    <div class="kpi"><div class="lbl">${t.kpiNights} · ${fy}</div><div class="val">${ni}</div><div class="delta">${deltaHTML(ni,pni,{ctx})}</div></div>
+    <div class="kpi"><div class="lbl">${t.kpiLOS}</div><div class="val">${los.toFixed(1)} <span style="font-size:14px;color:var(--muted)">${t.unitNights}</span></div><div class="delta">${deltaHTML(los,plos,{ctx})}</div></div>
+    <div class="kpi"><div class="lbl">${t.kpiDirect}</div><div class="val">${dsh.toFixed(0)}%</div><div class="delta">${deltaHTML(dsh,pdsh,{pp:pdsh!=null?dsh-pdsh:null,ctx})}</div></div>`;
+  const allOn=DATA.filter(b=>enabled.has(b.ev));
+  const peak=mval(allOn.filter(b=>b.honap===7||b.honap===8)), tot=mval(allOn)||1;
+  const ds=y=>{const r=DATA.filter(b=>b.ev===y);return r.length?r.filter(b=>b.csatorna==='Privát').length/r.length*100:0;};
+  const cnt=y=>DATA.filter(b=>b.ev===y).length;
+  const fullY=YEARS.filter(y=>y<2026);
+  let peakY=fullY[0]; fullY.forEach(y=>{if(cnt(y)>cnt(peakY))peakY=y;});
+  let dHY=fullY[0]; fullY.forEach(y=>{if(ds(y)>ds(dHY))dHY=y;});
+  const lastY=Math.max(...fullY);
+  document.getElementById('insight').innerHTML=t.insight(Math.round(peak/tot*100),t.mlow[metric],peakY,cnt(peakY),lastY,cnt(lastY),Math.round(ds(dHY)),dHY);
+  document.getElementById('heroMetric').textContent=t.mname[metric]+' '+t.perMonth;
+  const datasets=on.map(y=>({label:String(y),data:MN.map(m=>mval(DATA.filter(b=>b.ev===y&&b.honap===m))),
+     borderColor:YCOL[y],backgroundColor:YCOL[y],borderWidth:y===fy?3.2:1.8,tension:.35,pointRadius:y===fy?3:2,pointHoverRadius:5}));
+  if(hero)hero.destroy();
+  hero=new Chart(document.getElementById('hero'),{type:'line',data:{labels:MN.map(m=>t.months[m]),datasets},plugins:[peakBand],
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+      plugins:{legend:{position:'bottom',onClick:()=>{},labels:{boxWidth:12,usePointStyle:true,font:{size:12}}},
+        tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw} ${t.mlow[metric]}`}}},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#F0ECE4'}}}}});
+  const dPct=on.map(y=>{const r=DATA.filter(b=>b.ev===y);const d=mval(r.filter(b=>b.csatorna==='Privát')),o=mval(r.filter(b=>b.csatorna==='Szállás.hu'));const tt=d+o||1;return [d/tt*100,o/tt*100];});
+  if(mix)mix.destroy();
+  mix=new Chart(document.getElementById('mix'),{type:'bar',data:{labels:on,datasets:[
+      {label:t.direct,data:dPct.map(x=>x[0]),backgroundColor:TEAL,borderRadius:3,stack:'s'},
+      {label:t.ota,data:dPct.map(x=>x[1]),backgroundColor:TERRA,borderRadius:3,stack:'s'}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${Math.round(c.raw)}%`}}},
+      scales:{x:{grid:{display:false},stacked:true},y:{stacked:true,max:100,grid:{color:'#F0ECE4'},ticks:{callback:v=>v+'%'}}}}});
+  const rowsEn=DATA.filter(b=>enabled.has(b.ev));
+  const pr=rowsEn.filter(b=>b.csatorna==='Privát'), oa=rowsEn.filter(b=>b.csatorna==='Szállás.hu');
+  const wh=a=>a.length?a.filter(b=>b.aptn>=2).length/a.length*100:0;
+  const avgFo=a=>{const f=a.filter(b=>b.fo>0);return f.length?sum(f,b=>b.fo)/f.length:0;};
+  if(prof)prof.destroy();
+  prof=new Chart(document.getElementById('prof'),{type:'bar',data:{labels:[t.direct,t.ota],datasets:[{data:[wh(pr),wh(oa)],backgroundColor:[TEAL,TERRA],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+t.wholeTip(Math.round(c.raw))}}},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#F0ECE4'},ticks:{callback:v=>v+'%'},title:{display:true,text:t.wholeAxis}}}}});
+  document.getElementById('profLegend').innerHTML=t.avgGroup(avgFo(pr).toFixed(1),avgFo(oa).toFixed(1));
+  // Per-apartment occupancy (money-free)
+  const APT=(window.HOLDUDVAR_APT||[]);
+  const availY=[...new Set(APT.map(x=>x.ev))];
+  const useY=YEARS.filter(y=>enabled.has(y)&&availY.includes(y));
+  const SEASON=[4,5,6,7,8,9,10], seasonDays=SEASON.reduce((s,m)=>s+DAYS[m],0);
+  const capTotal=(useY.length*seasonDays)||1;
+  const occA=['Telihold','Félhold','Holdfény'].map(a=>APT.filter(x=>x.apt===a&&useY.includes(x.ev)&&x.honap>=4).reduce((s,x)=>s+x.nights,0)/capTotal*100);
+  if(apt)apt.destroy();
+  apt=new Chart(document.getElementById('aptChart'),{type:'bar',data:{labels:['Telihold (2–4)','Félhold (2–4)','Holdfény (4–6)'],datasets:[{data:occA,backgroundColor:['#1F5F60','#3E8487','#8FB7AE'],borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(0)+'%'}}},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#F0ECE4'},ticks:{callback:v=>v+'%'}}}}});
+  const losY=on.map(y=>{const r=DATA.filter(b=>b.ev===y);return r.length?sum(r,NI)/r.length:0;});
+  if(sec)sec.destroy();
+  sec=new Chart(document.getElementById('sec'),{type:'bar',data:{labels:on,datasets:[{data:losY,backgroundColor:on.map(y=>YCOL[y]),borderRadius:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(1)+' '+t.tipNights}}},
+      scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:'#F0ECE4'}}}}});
+  buildOcc();
+}
+
+function setLang(l){lang=l;localStorage.setItem('holdudvar_lang',l);applyStatic();render();}
+document.querySelectorAll('#langseg button').forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+document.querySelectorAll('.mt').forEach(e=>e.onclick=()=>{metric=e.dataset.m;document.querySelectorAll('.mt').forEach(x=>x.classList.toggle('active',x===e));render()});
+const chipBox=document.getElementById('yearChips');
+YEARS.forEach(y=>{const c=document.createElement('span');c.className='chip';c.textContent=y;c.style.borderColor=YCOL[y];
+  c.onclick=()=>{enabled.has(y)?enabled.delete(y):enabled.add(y);c.classList.toggle('off',!enabled.has(y));render()};chipBox.appendChild(c);});
+
+applyStatic();
+render();
+</script>
 </body>
 </html>
