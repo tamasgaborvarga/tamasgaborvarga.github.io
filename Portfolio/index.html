@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tamás Gábor Varga — Process Engineer → Business Process & Analysis</title>
+<meta name="description" content="Tamás Gábor Varga — process engineer moving into business process improvement and analysis. Engineering rigor meets a business mindset." />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#f7f8fa" id="themeColorMeta" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Tamás Gábor Varga — Process Engineer → Business Process & Analysis" />
+<meta property="og:description" content="Process engineer moving into business process improvement and analysis. Engineering rigor meets a business mindset." />
+<meta property="og:url" content="https://tamasgaborvarga.github.io/" />
+<meta property="og:image" content="https://tamasgaborvarga.github.io/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://tamasgaborvarga.github.io/og-image.png" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --bg-soft: #ffffff;
+    --card: #ffffff;
+    --border: #e3e7ee;
+    --text: #16181d;
+    --muted: #646874;
+    --accent: #16181d;
+    --accent-soft: rgba(22, 24, 29, 0.05);
+    --accent-text: #ffffff;
+    --primary-hover: #34373f;
+    --nav-bg: rgba(247, 248, 250, 0.85);
+    --glow: rgba(22, 24, 29, 0.06);
+    --shot-1: #eef1f7;
+    --shot-2: #e3e8f2;
+    --shadow: rgba(26, 34, 51, 0.08);
+    --max: 980px;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101216;
+    --bg-soft: #16181d;
+    --card: #16181d;
+    --border: #2b2e36;
+    --text: #f2f3f5;
+    --muted: #9a9ea8;
+    --accent: #f2f3f5;
+    --accent-soft: rgba(242, 243, 245, 0.08);
+    --accent-text: #16181d;
+    --primary-hover: #d8dadd;
+    --nav-bg: rgba(16, 18, 22, 0.85);
+    --glow: rgba(242, 243, 245, 0.05);
+    --shot-1: #1b1e25;
+    --shot-2: #20232b;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101216;
+      --bg-soft: #16181d;
+      --card: #16181d;
+      --border: #2b2e36;
+      --text: #f2f3f5;
+      --muted: #9a9ea8;
+      --accent: #f2f3f5;
+      --accent-soft: rgba(242, 243, 245, 0.08);
+      --accent-text: #16181d;
+      --primary-hover: #d8dadd;
+      --nav-bg: rgba(16, 18, 22, 0.85);
+      --glow: rgba(242, 243, 245, 0.05);
+      --shot-1: #1b1e25;
+      --shot-2: #20232b;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background .3s ease, color .3s ease;
+  }
+
+  h1, h2, h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; line-height: 1.2; }
+
+  a { color: inherit; text-decoration: none; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .card a:focus-visible, .btn:focus-visible, .contact-card:focus-visible { outline-offset: 4px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  section { padding: 84px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 80px; }
+  #contact { border-bottom: none; }
+
+  .sec-head { display: flex; align-items: center; gap: 13px; margin-bottom: 18px; }
+  .sec-head .eyebrow { margin-bottom: 0; }
+  .sec-icon {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 11px;
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  h2 + .lead-para { margin-top: 18px; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  nav .brand { font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; letter-spacing: 0.01em; }
+  nav .links { display: flex; gap: 28px; }
+  nav .links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+  nav .links a:hover, nav .links a.active { color: var(--text); }
+  @media (max-width: 640px) { nav .links { display: none; } }
+
+  .theme-toggle {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 9px; margin-left: 20px;
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--muted);
+    transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .theme-toggle .i-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
+
+  /* HERO */
+  .hero { padding: 110px 0 96px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -160px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, var(--glow), transparent 65%);
+    pointer-events: none;
+  }
+  .hero .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 26px; }
+  .hero .status {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 6px 14px; background: var(--bg-soft);
+  }
+  .hero .loc { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .hero .loc svg { opacity: 0.8; }
+  .hero .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #36d399; box-shadow: 0 0 0 3px rgba(54,211,153,0.18); }
+  .hero h1 { font-size: clamp(36px, 6vw, 58px); font-weight: 800; letter-spacing: -0.02em; }
+  .hero .subtitle {
+    font-family: 'Space Grotesk';
+    font-size: clamp(17px, 2.6vw, 22px);
+    color: var(--accent);
+    margin-top: 14px; font-weight: 600;
+  }
+  .hero p.lead { color: var(--muted); font-size: 17px; max-width: 620px; margin-top: 22px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    border: 1px solid var(--border); transition: border-color .2s, background .2s, transform .2s; background: var(--card);
+  }
+  .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+  .btn.primary:hover { background: var(--primary-hover); }
+
+  /* SKILLS */
+  .lead-para { color: var(--muted); font-size: 17px; max-width: 680px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .tag {
+    font-size: 14px; font-weight: 500;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--accent-soft); border: 1px solid var(--border); color: var(--text);
+  }
+
+  /* PROJECTS */
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+  @media (max-width: 860px) { .cards { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; display: flex; flex-direction: column; transition: border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 30px var(--shadow); }
+  .card .shot {
+    position: relative;
+    height: 150px; background: linear-gradient(135deg, var(--shot-1), var(--shot-2));
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    filter: brightness(0.84);
+    transition: filter .35s ease;
+  }
+  .card:hover .shot,
+  .card:active .shot,
+  .card:focus-within .shot { filter: brightness(1); }
+  .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* slow zoom on hover — applies to any cover content (img, svg, brand tile) on every card */
+  .card .shot > :not(.cat-badge) { transition: transform .45s ease; transform-origin: center; }
+  .card:hover .shot > :not(.cat-badge),
+  .card:active .shot > :not(.cat-badge),
+  .card:focus-within .shot > :not(.cat-badge) { transform: scale(1.05); }
+  .card .shot-brand {
+    background: linear-gradient(135deg, #ff5a18, #f84500);
+  }
+  .card .brand-cover {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 27px;
+    color: #fff; letter-spacing: 0.005em;
+  }
+  .card .cat-badge {
+    position: absolute; top: 9px; right: 10px; z-index: 1;
+    font-family: 'Space Grotesk'; font-size: 11px; font-weight: 500; letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.92); padding: 2px 8px; border-radius: 6px;
+    background: rgba(16, 18, 23, 0.42); backdrop-filter: blur(4px);
+  }
+  .card .body { padding: 13px 14px 14px; flex: 1; display: flex; flex-direction: column; }
+  .card h3 { font-size: 15px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
+  .card .meta span { font-size: 10px; color: var(--muted); border: 1px solid var(--border); padding: 2px 7px; border-radius: 5px; }
+  .card .card-link { margin-top: auto; padding-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+  .card .card-link.muted { color: var(--muted); }
+
+  /* EXPERIENCE */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 30px; }
+  .tl-item { display: grid; grid-template-columns: 150px 1fr; gap: 24px; padding: 22px 0; border-top: 1px solid var(--border); }
+  .tl-item:first-child { border-top: none; }
+  .tl-item .when { color: var(--muted); font-size: 14px; font-family: 'Space Grotesk'; font-weight: 600; }
+  .tl-item .role { font-weight: 600; font-size: 17px; }
+  .tl-item .org { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  @media (max-width: 560px) { .tl-item { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* CONTACT */
+  .contact-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+  .contact-card {
+    flex: 1; min-width: 220px;
+    display: flex; align-items: center; gap: 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px 22px; transition: border-color .2s;
+  }
+  .contact-card:hover { border-color: var(--accent); }
+  .contact-card .c-icon {
+    flex: none;
+    width: 44px; height: 44px; border-radius: 11px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+    border: 1px solid var(--border);
+    transition: background .2s, color .2s, border-color .2s;
+  }
+  .contact-card:hover .c-icon { border-color: var(--accent); }
+  .contact-card:hover .c-icon { background: var(--accent); color: var(--accent-text); }
+  .contact-card .c-text { display: flex; flex-direction: column; min-width: 0; }
+  .contact-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .contact-card .val { font-size: 16px; font-weight: 600; margin-top: 4px; word-break: break-word; }
+
+  footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+    .card:hover, .btn:hover { transform: none; }
+    /* keep the gentle cover zoom + brighten as a deliberate hover affordance */
+    .card .shot { transition: filter .35s ease !important; }
+    .card .shot > :not(.cat-badge) { transition: transform .45s ease !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#">Tamás Gábor Varga</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-meta">
+      <span class="status"><span class="dot"></span> Open to new opportunities</span>
+      <span class="loc">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        Budapest, Hungary
+      </span>
+    </div>
+    <h1>Tamás Gábor Varga</h1>
+    <div class="subtitle">Process Engineer → Business Process & Analysis</div>
+    <p class="lead">
+      Process engineer with 4+ years in manufacturing, now moving toward roles centered on
+      business processes and analysis. I pair analytical, engineering thinking with a
+      business mindset.
+    </p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:vtamasgabor@gmail.com">Email</a>
+      <a class="btn" href="https://www.linkedin.com/in/vargatamasgabor/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="vargatamasgabor_cv.pdf" download="vargatamasgabor_cv.pdf">CV</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT / SKILLS -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span><p class="eyebrow">About</p></div>
+    <h2>From manufacturing to business</h2>
+    <p class="lead-para">
+      I started in manufacturing, then realized I enjoy solving business problems more than
+      machine problems — so I began building analytics tools and products in my free time.
+      Now I'm looking to bring that mindset into Business Process &amp; Analysis roles.
+    </p>
+    <div class="tags">
+      <span class="tag">Process Optimization</span>
+      <span class="tag">Data Analysis</span>
+      <span class="tag">Product Thinking</span>
+      <span class="tag">Agile / Scrum</span>
+      <span class="tag">Stakeholder Communication</span>
+      <span class="tag">AI &amp; Prompt Engineering</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><p class="eyebrow">Projects</p></div>
+    <h2>Built outside of work</h2>
+    <p class="lead-para">For the fun of it — and to keep learning by building.</p>
+
+    <div class="cards">
+
+      <article class="card">
+        <div class="shot" style="background:linear-gradient(135deg,#1f2329,#2b3138)">
+          <span class="cat-badge">Analytics</span>
+          <svg viewBox="0 0 200 150" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="display:block">
+            <g stroke="rgba(255,255,255,0.16)" stroke-width="1"><line x1="20" y1="118" x2="180" y2="118"/><line x1="20" y1="88" x2="180" y2="88"/><line x1="20" y1="58" x2="180" y2="58"/></g>
+            <g fill="rgba(255,255,255,0.9)"><rect x="34" y="92" width="16" height="26" rx="2"/><rect x="62" y="70" width="16" height="48" rx="2"/><rect x="90" y="44" width="16" height="74" rx="2"/><rect x="118" y="80" width="16" height="38" rx="2"/><rect x="146" y="60" width="16" height="58" rx="2"/></g>
+            <polyline points="42,86 70,64 98,40 126,74 154,54" fill="none" stroke="#2f9e78" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Job Search Analytics</h3>
+          <div class="meta">
+            <span>Data Visualization</span><span>Vanilla JS</span><span>Chart.js</span><span>Product Thinking</span>
+          </div>
+          <a class="card-link" href="https://job-search-analytics.vtamasgabor.workers.dev/" target="_blank" rel="noopener">View →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><span class="cat-badge">Analytics</span><img src="worldcup.jpg" alt="World Cup 2026 trophy" loading="lazy" /></div>
+        <div class="body">
+          <h3>World Cup Tipping Game Dashboard</h3>
+          <div class="meta">
+            <span>Data Visualization</span><span>Monte Carlo Simulation</span><span>Statistical Modeling</span><span>Serverless</span>
+          </div>
+          <a class="card-link" href="https://zollner-2026-vb.vtamasgabor.workers.dev" target="_blank" rel="noopener">View →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><span class="cat-badge">Analytics</span><img src="holdudvar.jpg" alt="Holdudvar Vendégház — courtyard and garden" loading="lazy" /></div>
+        <div class="body">
+          <h3>Holdudvar Vendégház Analytics</h3>
+          <div class="meta">
+            <span>Hospitality BI</span><span>Data Visualization</span><span>Vanilla JS</span><span>Chart.js</span>
+          </div>
+          <a class="card-link" href="holdudvar.html" target="_blank" rel="noopener">View →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot shot-brand"><span class="cat-badge">Product</span><span class="brand-cover">BP Hoops</span></div>
+        <div class="body">
+          <h3>BP Hoops</h3>
+          <div class="meta">
+            <span>Vanilla JS</span><span>Supabase</span><span>Leaflet</span><span>PWA</span>
+          </div>
+          <a class="card-link" href="https://bphoops.hu" target="_blank" rel="noopener">View →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><p class="eyebrow">Experience</p></div>
+    <h2>Background</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="when">2025 – 2026</div>
+        <div>
+          <div class="role">Process Engineer</div>
+          <div class="org">Zollner Elektronik</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2021 – 2024</div>
+        <div>
+          <div class="role">Process Engineer</div>
+          <div class="org">Samsung SDI Hungary</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="when">2017 – 2021</div>
+        <div>
+          <div class="role">BSc, Engineering &amp; Industrial Management</div>
+          <div class="org">Óbuda University</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg></span><p class="eyebrow">Contact</p></div>
+    <h2>Let's talk</h2>
+    <p class="lead-para">I'm available for new opportunities and conversations.</p>
+    <div class="contact-grid">
+      <a class="contact-card" href="mailto:vtamasgabor@gmail.com">
+        <span class="c-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>
+        </span>
+        <span class="c-text">
+          <span class="label">Email</span>
+          <span class="val">vtamasgabor@gmail.com</span>
+        </span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/vargatamasgabor/" target="_blank" rel="noopener">
+        <span class="c-icon">
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+        </span>
+        <span class="c-text">
+          <span class="label">LinkedIn</span>
+          <span class="val">linkedin.com/in/vargatamasgabor</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Tamás Gábor Varga</div>
+</footer>
+
+<script>
+  (function () {
+    // Scrollspy — highlight the nav link of the section in view
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav .links a'));
+    var watched = navLinks
+      .map(function (l) { return { link: l, sec: document.getElementById(l.getAttribute('href').slice(1)) }; })
+      .filter(function (o) { return o.sec; });
+    if ('IntersectionObserver' in window && watched.length) {
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            navLinks.forEach(function (l) { l.classList.remove('active'); });
+            var hit = watched.filter(function (o) { return o.sec === e.target; })[0];
+            if (hit) hit.link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      watched.forEach(function (o) { obs.observe(o.sec); });
+    }
+  })();
+
+  (function () {
+    // Theme toggle — manual override on top of OS preference, persisted in localStorage
+    var THEME_COLORS = { light: '#f7f8fa', dark: '#101216' };
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var meta = document.getElementById('themeColorMeta');
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', THEME_COLORS[theme]);
+    }
+
+    apply(root.getAttribute('data-theme') || 'light');
+
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        apply(next);
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
