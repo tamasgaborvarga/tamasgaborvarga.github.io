@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Tamás Gábor Varga — Process Engineer → Business Analyst / Product Owner</title>
-<meta name="description" content="Tamás Gábor Varga — process engineer moving toward a Business Analyst / Product Owner role. Engineering analytics meets a business and product mindset." />
-<meta name="color-scheme" content="light" />
-<meta name="theme-color" content="#f7f8fa" />
+<title>Tamás Gábor Varga — Process Engineer → Business Process & Analysis</title>
+<meta name="description" content="Tamás Gábor Varga — process engineer moving into business process improvement and analysis. Engineering rigor meets a business mindset." />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#f7f8fa" id="themeColorMeta" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Tamás Gábor Varga — Process Engineer → Business Analyst / Product Owner" />
-<meta property="og:description" content="Process engineer moving toward Business Analyst / Product Owner. Engineering analytics meets a business and product mindset." />
+<meta property="og:title" content="Tamás Gábor Varga — Process Engineer → Business Process & Analysis" />
+<meta property="og:description" content="Process engineer moving into business process improvement and analysis. Engineering rigor meets a business mindset." />
 <meta property="og:url" content="https://tamasgaborvarga.github.io/" />
 <meta property="og:image" content="https://tamasgaborvarga.github.io/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -38,6 +47,44 @@
     --shot-2: #e3e8f2;
     --shadow: rgba(26, 34, 51, 0.08);
     --max: 980px;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101216;
+    --bg-soft: #16181d;
+    --card: #16181d;
+    --border: #2b2e36;
+    --text: #f2f3f5;
+    --muted: #9a9ea8;
+    --accent: #f2f3f5;
+    --accent-soft: rgba(242, 243, 245, 0.08);
+    --accent-text: #16181d;
+    --primary-hover: #d8dadd;
+    --nav-bg: rgba(16, 18, 22, 0.85);
+    --glow: rgba(242, 243, 245, 0.05);
+    --shot-1: #1b1e25;
+    --shot-2: #20232b;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101216;
+      --bg-soft: #16181d;
+      --card: #16181d;
+      --border: #2b2e36;
+      --text: #f2f3f5;
+      --muted: #9a9ea8;
+      --accent: #f2f3f5;
+      --accent-soft: rgba(242, 243, 245, 0.08);
+      --accent-text: #16181d;
+      --primary-hover: #d8dadd;
+      --nav-bg: rgba(16, 18, 22, 0.85);
+      --glow: rgba(242, 243, 245, 0.05);
+      --shot-1: #1b1e25;
+      --shot-2: #20232b;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -100,6 +147,19 @@
   nav .links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
   nav .links a:hover, nav .links a.active { color: var(--text); }
   @media (max-width: 640px) { nav .links { display: none; } }
+
+  .theme-toggle {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 9px; margin-left: 20px;
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--muted);
+    transition: border-color .2s, color .2s;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .theme-toggle .i-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
 
   /* HERO */
   .hero { padding: 110px 0 96px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
@@ -171,10 +231,10 @@
   .card:focus-within .shot { filter: brightness(1); }
   .card .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
   /* slow zoom on hover — applies to any cover content (img, svg, brand tile) on every card */
-  .card .shot > :not(.year-badge) { transition: transform .45s ease; transform-origin: center; }
-  .card:hover .shot > :not(.year-badge),
-  .card:active .shot > :not(.year-badge),
-  .card:focus-within .shot > :not(.year-badge) { transform: scale(1.05); }
+  .card .shot > :not(.cat-badge) { transition: transform .45s ease; transform-origin: center; }
+  .card:hover .shot > :not(.cat-badge),
+  .card:active .shot > :not(.cat-badge),
+  .card:focus-within .shot > :not(.cat-badge) { transform: scale(1.05); }
   .card .shot-brand {
     background: linear-gradient(135deg, #ff5a18, #f84500);
   }
@@ -182,7 +242,7 @@
     font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 27px;
     color: #fff; letter-spacing: 0.005em;
   }
-  .card .year-badge {
+  .card .cat-badge {
     position: absolute; top: 9px; right: 10px; z-index: 1;
     font-family: 'Space Grotesk'; font-size: 11px; font-weight: 500; letter-spacing: 0.03em;
     color: rgba(255, 255, 255, 0.92); padding: 2px 8px; border-radius: 6px;
@@ -190,10 +250,9 @@
   }
   .card .body { padding: 13px 14px 14px; flex: 1; display: flex; flex-direction: column; }
   .card h3 { font-size: 15px; }
-  .card p { color: var(--muted); font-size: 12px; line-height: 1.45; margin-top: 7px; flex: 1; }
-  .card .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 11px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; }
   .card .meta span { font-size: 10px; color: var(--muted); border: 1px solid var(--border); padding: 2px 7px; border-radius: 5px; }
-  .card .card-link { margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
+  .card .card-link { margin-top: auto; padding-top: 12px; font-size: 12px; font-weight: 600; color: var(--accent); display: inline-flex; align-items: center; gap: 6px; }
   .card .card-link.muted { color: var(--muted); }
 
   /* EXPERIENCE */
@@ -236,7 +295,7 @@
     .card:hover, .btn:hover { transform: none; }
     /* keep the gentle cover zoom + brighten as a deliberate hover affordance */
     .card .shot { transition: filter .35s ease !important; }
-    .card .shot > :not(.year-badge) { transition: transform .45s ease !important; }
+    .card .shot > :not(.cat-badge) { transition: transform .45s ease !important; }
   }
 </style>
 </head>
@@ -251,6 +310,10 @@
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -265,11 +328,11 @@
       </span>
     </div>
     <h1>Tamás Gábor Varga</h1>
-    <div class="subtitle">Process Engineer → Business Analyst / Product Owner</div>
+    <div class="subtitle">Process Engineer → Business Process & Analysis</div>
     <p class="lead">
-      Process engineer with 4+ years in manufacturing, now moving toward a business- and
-      product-focused role. I pair analytical, engineering thinking with a business and
-      product mindset.
+      Process engineer with 4+ years in manufacturing, now moving toward roles centered on
+      business processes and analysis. I pair analytical, engineering thinking with a
+      business mindset.
     </p>
     <div class="btns">
       <a class="btn primary" href="mailto:vtamasgabor@gmail.com">Email</a>
@@ -283,17 +346,15 @@
 <section id="about">
   <div class="wrap">
     <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></span><p class="eyebrow">About</p></div>
-    <h2>Engineering analytics, product mindset</h2>
+    <h2>From manufacturing to business</h2>
     <p class="lead-para">
-      I come from optimizing manufacturing processes — that's where I learned to start from
-      data, understand the real problem, find the root cause, and ship a measurable solution.
-      I'm now bringing that structured, analytical approach into the product world, where user
-      needs, business value, and feasibility meet.
+      I started in manufacturing, then realized I enjoy solving business problems more than
+      machine problems — so I began building analytics tools and products in my free time.
+      Now I'm looking to bring that mindset into Business Process &amp; Analysis roles.
     </p>
     <div class="tags">
       <span class="tag">Process Optimization</span>
       <span class="tag">Data Analysis</span>
-      <span class="tag">SAP</span>
       <span class="tag">Product Thinking</span>
       <span class="tag">Agile / Scrum</span>
       <span class="tag">Stakeholder Communication</span>
@@ -308,11 +369,12 @@
     <div class="sec-head"><span class="sec-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/></svg></span><p class="eyebrow">Projects</p></div>
     <h2>Built outside of work</h2>
     <p class="lead-para">For the fun of it — and to keep learning by building.</p>
+
     <div class="cards">
 
       <article class="card">
         <div class="shot" style="background:linear-gradient(135deg,#1f2329,#2b3138)">
-          <span class="year-badge">2026</span>
+          <span class="cat-badge">Analytics</span>
           <svg viewBox="0 0 200 150" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="display:block">
             <g stroke="rgba(255,255,255,0.16)" stroke-width="1"><line x1="20" y1="118" x2="180" y2="118"/><line x1="20" y1="88" x2="180" y2="88"/><line x1="20" y1="58" x2="180" y2="58"/></g>
             <g fill="rgba(255,255,255,0.9)"><rect x="34" y="92" width="16" height="26" rx="2"/><rect x="62" y="70" width="16" height="48" rx="2"/><rect x="90" y="44" width="16" height="74" rx="2"/><rect x="118" y="80" width="16" height="38" rx="2"/><rect x="146" y="60" width="16" height="58" rx="2"/></g>
@@ -321,10 +383,6 @@
         </div>
         <div class="body">
           <h3>Job Search Analytics</h3>
-          <p>
-            I treated my own career transition like a business problem — tracking, measuring
-            and visualizing every application in a clean, honest analytics dashboard.
-          </p>
           <div class="meta">
             <span>Data Visualization</span><span>Vanilla JS</span><span>Chart.js</span><span>Product Thinking</span>
           </div>
@@ -333,13 +391,9 @@
       </article>
 
       <article class="card">
-        <div class="shot"><span class="year-badge">2026</span><img src="worldcup.jpg" alt="World Cup 2026 trophy" loading="lazy" /></div>
+        <div class="shot"><span class="cat-badge">Analytics</span><img src="worldcup.jpg" alt="World Cup 2026 trophy" loading="lazy" /></div>
         <div class="body">
           <h3>World Cup Tipping Game Dashboard</h3>
-          <p>
-            A live dashboard visualizing a 63-player World Cup tipping game, with Monte Carlo
-            odds for each final position.
-          </p>
           <div class="meta">
             <span>Data Visualization</span><span>Monte Carlo Simulation</span><span>Statistical Modeling</span><span>Serverless</span>
           </div>
@@ -348,31 +402,24 @@
       </article>
 
       <article class="card">
-        <div class="shot shot-brand"><span class="year-badge">2026</span><span class="brand-cover">BP Hoops</span></div>
-        <div class="body">
-          <h3>BP Hoops</h3>
-          <p>
-            A community PWA that maps Budapest's basketball courts and organizes pickup games.
-          </p>
-          <div class="meta">
-            <span>Vanilla JS</span><span>Supabase</span><span>Leaflet</span><span>PWA</span>
-          </div>
-          <a class="card-link" href="https://bphoops.hu" target="_blank" rel="noopener">View →</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="shot"><span class="year-badge">2026</span><img src="holdudvar.jpg" alt="Holdudvar Vendégház — courtyard and garden" loading="lazy" /></div>
+        <div class="shot"><span class="cat-badge">Analytics</span><img src="holdudvar.jpg" alt="Holdudvar Vendégház — courtyard and garden" loading="lazy" /></div>
         <div class="body">
           <h3>Holdudvar Vendégház Analytics</h3>
-          <p>
-            Six seasons of our family guesthouse's booking data turned into a hospitality BI
-            dashboard.
-          </p>
           <div class="meta">
             <span>Hospitality BI</span><span>Data Visualization</span><span>Vanilla JS</span><span>Chart.js</span>
           </div>
           <a class="card-link" href="holdudvar.html" target="_blank" rel="noopener">View →</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot shot-brand"><span class="cat-badge">Product</span><span class="brand-cover">BP Hoops</span></div>
+        <div class="body">
+          <h3>BP Hoops</h3>
+          <div class="meta">
+            <span>Vanilla JS</span><span>Supabase</span><span>Leaflet</span><span>PWA</span>
+          </div>
+          <a class="card-link" href="https://bphoops.hu" target="_blank" rel="noopener">View →</a>
         </div>
       </article>
 
@@ -462,6 +509,29 @@
         });
       }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
       watched.forEach(function (o) { obs.observe(o.sec); });
+    }
+  })();
+
+  (function () {
+    // Theme toggle — manual override on top of OS preference, persisted in localStorage
+    var THEME_COLORS = { light: '#f7f8fa', dark: '#101216' };
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var meta = document.getElementById('themeColorMeta');
+
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', THEME_COLORS[theme]);
+    }
+
+    apply(root.getAttribute('data-theme') || 'light');
+
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        apply(next);
+      });
     }
   })();
 </script>
