@@ -8,7 +8,8 @@ Personal one-page portfolio. Static site (single `index.html`, no build step).
 - `index.html` — the whole site
 - `worldcup.jpg`, `holdudvar.jpg` — project cover images
 - `og-image.png` — social share preview (1200×630)
-- `cv.pdf` — downloadable CV
+- `vargatamasgabor_cv.pdf` — downloadable CV (generated from `cv.html`)
+- `cv.html` — CV source; print to PDF with Chrome (`--headless --print-to-pdf`), no Office needed
 - `.nojekyll` — tells GitHub Pages to serve files as-is
 
 ## Deploy (GitHub Pages — user site)

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Tamás Gábor Varga — CV</title>
+<style>
+  @page { size: A4; margin: 13mm 15mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Calibri, "Segoe UI", sans-serif; color: #000; font-size: 11pt; line-height: 1.37; }
+
+  .name { font-family: Georgia, "Times New Roman", serif; font-weight: 700; font-size: 29pt; text-align: center; letter-spacing: .3px; }
+  .subtitle { font-family: Georgia, serif; font-size: 13pt; text-align: center; margin-top: 5px; }
+  .contact { text-align: center; font-size: 10.5pt; margin-top: 7px; line-height: 1.55; }
+  .contact a { color: #000; text-decoration: none; }
+  .rule { border-bottom: 1.5pt solid #000; margin: 9px 0 0; }
+
+  h2 { font-family: Georgia, serif; font-weight: 700; font-size: 13pt; text-transform: uppercase;
+       border-bottom: 1pt solid #000; padding-bottom: 3px; margin: 14px 0 8px; }
+
+  .entry { margin-bottom: 9px; }
+  .entry:last-of-type { margin-bottom: 0; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .role { font-family: Georgia, serif; font-size: 11.5pt; }
+  .role b { font-weight: 700; }
+  .role .sep { font-weight: 400; }
+  .dates { font-family: Georgia, serif; font-size: 11pt; white-space: nowrap; }
+  ul { list-style: none; margin: 5px 0 0; }
+  li { position: relative; padding-left: 15px; margin: 5px 0; }
+  li::before { content: "•"; position: absolute; left: 3px; }
+
+  .edu-line { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+  .edu-line .deg { font-family: Georgia, serif; font-size: 11.5pt; }
+  .edu-line .deg b { font-weight: 700; }
+  .edu-sub { margin-top: 5px; }
+
+  .skills { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; row-gap: 5px; margin-top: 3px; }
+
+  .langs { margin-top: 3px; }
+  .langs div { margin: 4px 0; }
+</style>
+</head>
+<body>
+
+  <div class="name">Tamás Gábor Varga</div>
+  <div class="subtitle">Business Analyst / Product Owner &middot; Process Improvement &middot; Digital Operations</div>
+  <div class="contact">
+    +36-20-337-0044 &middot; vtamasgabor@gmail.com &middot; Budapest, Hungary<br>
+    <a href="https://www.linkedin.com/in/vargatamasgabor">linkedin.com/in/vargatamasgabor</a> &middot; <a href="https://tamasgaborvarga.github.io/">tamasgaborvarga.github.io</a>
+  </div>
+  <div class="rule"></div>
+
+  <h2>Profile Summary</h2>
+  <p>Engineer with 4+ years of experience in process optimization, cross-functional collaboration, and data analysis. Looking to transition into a Business Analyst, Product Owner, or Operations role, where I can apply my analytical background to improve business processes and drive digital solutions.</p>
+
+  <h2>Work Experience</h2>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="role"><b>Process Engineer</b> <span class="sep">|</span> Zollner Elektronik AG</div>
+      <div class="dates">Jun 2025 – Jul 2026 &middot; Vác</div>
+    </div>
+    <ul>
+      <li>Support engineering and documentation of custom-built currency processing machines for central bank clients</li>
+      <li>Create and maintain detailed assembly instructions based on 3D CAD models and mechanical drawings</li>
+      <li>Manage product data and documentation in SAP; provide technical support to production teams</li>
+      <li>Independently developed Excel-based automation and digital reporting systems adopted across the team</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="role"><b>Process Engineer</b> <span class="sep">|</span> Samsung SDI Hungary</div>
+      <div class="dates">Dec 2021 – Aug 2024 &middot; Göd</div>
+    </div>
+    <ul>
+      <li>Supported Li-ion battery production for EVs through process testing and validation (MSA, TQR, CCB)</li>
+      <li>Conducted root cause analysis using 8D and FMEA methodologies to resolve recurring quality and defect issues</li>
+      <li>Collaborated with Quality teams to optimize processes using DOE and SPC; managed SAP documentation and cross-functional reporting</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-head">
+      <div class="role"><b>Accounting Intern</b> <span class="sep">|</span> HEXUM Finance Ltd</div>
+      <div class="dates">Feb 2021 – Apr 2021 &middot; Budapest</div>
+    </div>
+    <ul>
+      <li>Supported tangible asset accounting, reconciliations, and financial statement preparation tasks</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <div class="edu-line">
+    <div class="deg"><b>BSc – Engineering &amp; Industrial Management</b> <span class="sep">|</span> Óbuda University</div>
+    <div class="dates">2017 – 2021 &middot; Budapest</div>
+  </div>
+  <div class="edu-sub">Specializations: Corporate Governance (Economic) &middot; Mechanical Engineering (Technical)</div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <div>Business Process Analysis &amp; Improvement</div>
+    <div>SAP (ERP, Materials Management, Documentation)</div>
+    <div>Data Analysis &amp; Reporting (Excel, Power BI basics)</div>
+    <div>AI Tools &amp; Prompt Engineering (Claude Code, Copilot Studio)</div>
+    <div>SQL (basics), No-code / Low-code Development</div>
+    <div>Lean, Six Sigma, FMEA, 8D, DOE, SPC</div>
+    <div>Requirements Gathering &amp; Documentation &middot; Agile / Scrum</div>
+  </div>
+
+  <h2>Languages</h2>
+  <div class="langs">
+    <div>Hungarian – Native</div>
+    <div>English – B2 Professional Working Proficiency</div>
+    <div>German – B2 Limited Working Proficiency</div>
+  </div>
+
+</body>
+</html>
