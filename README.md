@@ -5,8 +5,7 @@ Personal one-page portfolio. Static site (single `index.html`, no build step).
 **Live:** https://tamasgaborvarga.github.io/
 
 ## Files
-- `index.html` — the whole site
-- `worldcup.jpg`, `holdudvar.jpg` — project cover images
+- `index.html` — the whole site (project cards are text-only, no cover images)
 - `og-image.png` — social share preview (1200×630)
 - `vargatamasgabor_cv.pdf` — downloadable CV (generated from `cv.html`)
 - `cv.html` — CV source; print to PDF with Chrome (`--headless --print-to-pdf`), no Office needed
