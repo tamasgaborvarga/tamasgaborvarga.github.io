@@ -151,12 +151,12 @@
     display: none;
     flex: none;
     align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 50%; margin-left: 12px;
-    border: 1px solid var(--border); background: var(--bg-soft); color: var(--muted);
-    transition: border-color .2s, color .2s;
+    width: 34px; height: 34px; margin-left: 8px;
+    border: none; background: none; color: var(--muted);
+    transition: color .2s;
   }
-  .nav-toggle:hover { border-color: var(--accent); color: var(--text); }
-  .nav-toggle svg { width: 16px; height: 16px; }
+  .nav-toggle:hover { color: var(--text); }
+  .nav-toggle svg { width: 20px; height: 20px; }
   .nav-toggle .i-close { display: none; }
   nav.open .nav-toggle .i-menu { display: none; }
   nav.open .nav-toggle .i-close { display: block; }
@@ -185,12 +185,12 @@
   .theme-toggle {
     flex: none;
     display: inline-flex; align-items: center; justify-content: center;
-    width: 34px; height: 34px; border-radius: 50%; margin-left: 20px;
-    border: 1px solid var(--border); background: var(--bg-soft); color: var(--muted);
-    transition: border-color .2s, color .2s;
+    width: 34px; height: 34px; margin-left: 20px;
+    border: none; background: none; color: var(--muted);
+    transition: color .2s;
   }
-  .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
-  .theme-toggle svg { width: 16px; height: 16px; }
+  .theme-toggle:hover { color: var(--text); }
+  .theme-toggle svg { width: 19px; height: 19px; }
   .theme-toggle .i-sun { display: none; }
   :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
   :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
@@ -243,6 +243,16 @@
   }
 
   /* PROJECTS */
+  .proj-filter { display: none; position: relative; margin-top: 26px; }
+  .proj-filter select {
+    width: 100%; appearance: none; -webkit-appearance: none;
+    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--text);
+    background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+    padding: 12px 40px 12px 18px;
+  }
+  .proj-filter-chevron { position: absolute; top: 50%; right: 16px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  @media (max-width: 640px) { .proj-filter { display: block; } }
+
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 34px; }
   .card.featured { grid-column: span 2; }
   .card.featured .body { padding: 22px 22px 20px; }
@@ -396,9 +406,19 @@
     <h2>Built outside of work</h2>
     <p class="lead-para">For the fun of it — and to keep learning by building.</p>
 
-    <div class="cards">
+    <div class="proj-filter">
+      <select id="projFilter" aria-label="Filter projects by category">
+        <option value="all">All categories</option>
+        <option value="analytics">Analytics</option>
+        <option value="product">Product</option>
+        <option value="web">Website</option>
+      </select>
+      <svg class="proj-filter-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </div>
 
-      <article class="card featured">
+    <div class="cards" id="projectCards">
+
+      <article class="card featured" data-cat="analytics">
         <div class="body">
           <span class="cat c-analytics">Analytics</span>
           <h3>Job Search Analytics</h3>
@@ -410,7 +430,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-cat="analytics">
         <div class="body">
           <span class="cat c-analytics">Analytics</span>
           <h3>World Cup Tipping Game Dashboard</h3>
@@ -422,7 +442,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-cat="analytics">
         <div class="body">
           <span class="cat c-analytics">Analytics</span>
           <h3>Holdudvar Vendégház Analytics</h3>
@@ -434,7 +454,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-cat="product">
         <div class="body">
           <span class="cat c-product">Product</span>
           <h3>BP Hoops</h3>
@@ -446,9 +466,9 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card" data-cat="web">
         <div class="body">
-          <span class="cat c-web">Web</span>
+          <span class="cat c-web">Website</span>
           <h3>Physio &amp; More Website</h3>
           <p class="desc">Custom-designed landing page for a physiotherapy practice.</p>
           <div class="meta">
@@ -596,6 +616,20 @@
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') close();
+    });
+  })();
+
+  (function () {
+    // Mobile project category filter
+    var select = document.getElementById('projFilter');
+    var cards = document.querySelectorAll('#projectCards .card');
+    if (!select || !cards.length) return;
+
+    select.addEventListener('change', function () {
+      var value = select.value;
+      cards.forEach(function (card) {
+        card.style.display = (value === 'all' || card.getAttribute('data-cat') === value) ? '' : 'none';
+      });
     });
   })();
 </script>
