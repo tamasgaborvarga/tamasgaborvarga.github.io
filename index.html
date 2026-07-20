@@ -146,7 +146,41 @@
   nav .links { display: flex; gap: 28px; }
   nav .links a { color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
   nav .links a:hover, nav .links a.active { color: var(--text); }
-  @media (max-width: 640px) { nav .links { display: none; } }
+
+  .nav-toggle {
+    display: none;
+    flex: none;
+    align-items: center; justify-content: center;
+    width: 34px; height: 34px; border-radius: 50%; margin-left: 12px;
+    border: 1px solid var(--border); background: var(--bg-soft); color: var(--muted);
+    transition: border-color .2s, color .2s;
+  }
+  .nav-toggle:hover { border-color: var(--accent); color: var(--text); }
+  .nav-toggle svg { width: 16px; height: 16px; }
+  .nav-toggle .i-close { display: none; }
+  nav.open .nav-toggle .i-menu { display: none; }
+  nav.open .nav-toggle .i-close { display: block; }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: 6px 24px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .nav-mobile a {
+    padding: 13px 0; font-size: 15px; font-weight: 500; color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile a:last-child { border-bottom: none; }
+  .nav-mobile a:hover, .nav-mobile a.active { color: var(--text); }
+
+  @media (max-width: 640px) {
+    nav .links { display: none; }
+    .nav-toggle { display: inline-flex; }
+    nav.open .nav-mobile { display: flex; }
+  }
+
+  .nav-icons { display: flex; align-items: center; }
 
   .theme-toggle {
     flex: none;
@@ -281,7 +315,7 @@
 </head>
 <body>
 
-<nav>
+<nav id="siteNav">
   <div class="wrap">
     <a class="brand" href="#">Tamás Gábor Varga</a>
     <div class="links">
@@ -290,10 +324,22 @@
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
-      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    </button>
+    <div class="nav-icons">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="navMobile">
+        <svg class="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
@@ -483,7 +529,7 @@
 <script>
   (function () {
     // Scrollspy — highlight the nav link of the section in view
-    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav .links a'));
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav .links a, nav .nav-mobile a'));
     var watched = navLinks
       .map(function (l) { return { link: l, sec: document.getElementById(l.getAttribute('href').slice(1)) }; })
       .filter(function (o) { return o.sec; });
@@ -522,6 +568,35 @@
         apply(next);
       });
     }
+  })();
+
+  (function () {
+    // Mobile hamburger menu
+    var nav = document.getElementById('siteNav');
+    var toggle = document.getElementById('navToggle');
+    if (!nav || !toggle) return;
+
+    function close() {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+      var isOpen = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    nav.querySelectorAll('.nav-mobile a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+
+    document.addEventListener('click', function (e) {
+      if (nav.classList.contains('open') && !nav.contains(e.target)) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
   })();
 </script>
 
