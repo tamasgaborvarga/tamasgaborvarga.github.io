@@ -181,8 +181,8 @@
   .metals em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--muted); }
   .logo-note { font-size: 12px; color: var(--muted); padding: 2px 4px 4px; }
   .scene { margin: 0 -2%; }
-  .sc-box { position: relative; aspect-ratio: 1876 / 1188; overflow: hidden; }
-  .sc-in { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--s, 0.5)); }
+  .sc-box { --cw: 1876; position: relative; aspect-ratio: 1876 / 1188; overflow: hidden; }
+  .sc-in { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--s, 0.5)) translateY(var(--cy, 0px)); }
   .sc-base, .sc-fx, .sc-mask { position: absolute; inset: 0; width: 100%; height: 100%; }
   .sc-fx { pointer-events: none; }
   .sc-mask { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
@@ -193,6 +193,16 @@
   .sc-bar span { position: absolute; left: 40px; top: 17px; }
   .sc-bar i { position: absolute; left: 133px; top: 11px; width: 124px; height: 34px; border-radius: 18px; background: #000; }
   .sc-vw { position: absolute; top: 47px; left: 0; width: 390px; height: 800px; overflow: hidden; }
+  /* Mobilon a jelenet telefonra közelített kivágása (x 0–640, y 330–1188 a 1876×1188-as jelenetből):
+     a telefon a képernyő ~60%-át kapja, a laptop jobbra kifut */
+  @media (max-width: 700px) {
+    .duo, .scene { margin-left: -24px; margin-right: -24px; }
+    .duo { position: relative; aspect-ratio: 640 / 858; overflow: hidden; }
+    .duo img { position: absolute; left: 0; top: -38.46%; width: 293.125%; max-width: none; height: auto; }
+    .sc-box { --cw: 640; aspect-ratio: 640 / 858; }
+    .sc-in { --cy: -330px; }
+    .scene figcaption { padding-left: 24px; padding-right: 24px; }
+  }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .scene figcaption { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-top: 12px; }
   .intro-btn {
@@ -476,7 +486,7 @@
     var btn = document.getElementById('jxToggle');
     if (!box || !inner || !desk || !mob || !btn) return;
     var PERIOD = 6500, timer = null, visible = false, paused = false;
-    function fit() { inner.style.setProperty('--s', box.clientWidth / 1876); }
+    function fit() { inner.style.setProperty('--s', box.clientWidth / (parseFloat(getComputedStyle(box).getPropertyValue('--cw')) || 1876)); }
     function play() {
       clearTimeout(timer);
       var v = '?' + Date.now();
