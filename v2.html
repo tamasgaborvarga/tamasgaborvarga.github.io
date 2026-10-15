@@ -20,9 +20,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
-  /* B-változat: editorial + data/product irány, monokróm (akcentusszín nincs — a user döntése) */
+  /* B-változat: editorial + data/product irány, monokróm (akcentusszín nincs — a user döntése).
+     Címbetű: Inter Tight 600 (a Schibsted Grotesk 800 a usernek nem volt elég profi) — alternatívák: betuminta-v2.html */
   :root {
     --bg: #f5f4f0;
     --surface: #fbfaf7;
@@ -34,7 +35,7 @@
     --shadow: rgba(40, 34, 24, 0.10);
     --max: 1200px;
     --gut: clamp(20px, 4vw, 48px);
-    --display: 'Schibsted Grotesk', 'Inter', system-ui, sans-serif;
+    --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
   }
   :root[data-theme="dark"] {
     --bg: #111112;
@@ -71,7 +72,7 @@
     font-family: var(--display); font-size: 12px; font-weight: 600;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
   }
-  h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.04; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.025em; line-height: 1.05; }
 
   /* NAV */
   nav {
@@ -81,7 +82,7 @@
     border-bottom: 1px solid var(--line);
   }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
   .nav-r { display: flex; align-items: center; gap: 28px; }
   .nav-r a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s; }
   .nav-r a:hover { color: var(--ink); }
@@ -100,7 +101,7 @@
   .hero { padding: clamp(72px, 12vw, 150px) 0 clamp(64px, 9vw, 110px); border-bottom: 1px solid var(--line); }
   .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 64px; align-items: end; }
   @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 56px; } }
-  .hero h1 { font-size: clamp(46px, 8.2vw, 112px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; margin-top: 26px; max-width: 11ch; }
+  .hero h1 { font-size: clamp(44px, 7vw, 96px); font-weight: 600; letter-spacing: -0.028em; line-height: 1; margin-top: 26px; max-width: 12ch; text-wrap: balance; }
   .hero .sub { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 54ch; margin-top: 30px; line-height: 1.55; }
   .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 30px; font-size: 14px; color: var(--muted); }
   .meta .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); margin-right: 8px; vertical-align: 1px; }
@@ -158,7 +159,7 @@
 
   .p-head { display: flex; align-items: baseline; gap: 14px; }
   .p-head .n { font-family: var(--display); font-size: 13px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .proj h4 { font-family: var(--display); font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-top: 10px; }
+  .proj h4 { font-family: var(--display); font-size: clamp(28px, 3vw, 40px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; margin-top: 10px; }
   .proj .lede { font-size: 17px; color: var(--ink-2); margin-top: 14px; }
   .facts { margin-top: 26px; border-top: 1px solid var(--line); }
   .facts div { display: grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; line-height: 1.55; }
@@ -193,7 +194,7 @@
 
   /* CONTACT */
   #contact { border-bottom: 0; }
-  .contact h2 { font-size: clamp(48px, 9vw, 120px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; }
+  .contact h2 { font-size: clamp(48px, 8vw, 104px); font-weight: 600; letter-spacing: -0.028em; line-height: 1; }
   .contact .sub { color: var(--ink-2); font-size: 18px; margin-top: 24px; max-width: 44ch; }
   .c-links { display: grid; grid-template-columns: 1fr 1fr; margin-top: 56px; border-top: 1px solid var(--ink); }
   @media (max-width: 700px) { .c-links { grid-template-columns: 1fr; } }
