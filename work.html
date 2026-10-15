@@ -173,6 +173,13 @@
   .logo-card figcaption, .intro-unit figcaption { font-size: 13px; line-height: 1.55; color: var(--muted); padding: 2px 4px 4px; }
   .logo-card b, .intro-unit b { display: block; color: var(--text); font-weight: 600; margin-bottom: 2px; }
 
+  .metals { list-style: none; display: flex; flex-direction: column; border-top: 1px solid var(--border); margin: 0 4px; }
+  .metals li { display: grid; grid-template-columns: 14px 28px 1fr auto; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .metals .sw { width: 14px; height: 14px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(127,127,127,.35); }
+  .metals b { font-family: 'Space Grotesk'; font-weight: 700; }
+  .metals span:not(.sw) { color: var(--muted); }
+  .metals em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .logo-note { font-size: 12px; color: var(--muted); padding: 2px 4px 4px; }
   .intro-stage { position: relative; aspect-ratio: 1440 / 920; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--card); box-shadow: 0 12px 30px var(--shadow); }
   .intro-stage img, .intro-stage iframe { position: absolute; top: 0; left: 0; }
   .intro-stage img { width: 100%; height: 100%; }
@@ -320,7 +327,13 @@
             <div class="logo-stage light"><img class="logo-sym" src="work/alcufer-logo-sym-light.svg" width="172" height="172" alt="New ALCUFER symbol on a light background" /></div>
             <div class="logo-stage light"><img class="logo-stk" src="work/alcufer-logo-stk-light.svg" width="897" height="429" alt="New ALCUFER stacked lockup on a light background" /></div>
           </div>
-          <figcaption><b>New concept</b> A vector mark built from three material layers — aluminium, steel, copper. 16 variants: horizontal, stacked, symbol and wordmark, each in four colourways.</figcaption>
+          <figcaption><b>New concept: Al + Cu + Fe</b> The name is made of three chemical symbols — aluminium, copper, iron. The mark stacks those three metals into the letter A, layered by density: light on top, heaviest at the base — stable to the eye and in physics.</figcaption>
+          <ul class="metals">
+            <li><span class="sw" style="background:#97A0A9"></span><b>Al</b><span>Aluminium · apex</span><em>2.70 g/cm³</em></li>
+            <li><span class="sw" style="background:#2C333D"></span><b>Fe</b><span>Iron · crossbar</span><em>7.87 g/cm³</em></li>
+            <li><span class="sw" style="background:#B85A26"></span><b>Cu</b><span>Copper · base</span><em>8.96 g/cm³</em></li>
+          </ul>
+          <p class="logo-note">Vector, in 16 variants: horizontal, stacked, symbol and wordmark, each in four colourways.</p>
         </figure>
       </div>
 
