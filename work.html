@@ -187,13 +187,8 @@
   .sc-fx { pointer-events: none; }
   .sc-mask { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
   .sc-scr { position: absolute; top: 0; left: 0; transform-origin: 0 0; overflow: hidden; background: #000; }
-  .sc-scr > img, .sc-vw > img, .sc-scr iframe { position: absolute; top: 0; left: 0; }
+  .sc-scr > img, .sc-scr iframe { position: absolute; top: 0; left: 0; }
   .sc-scr iframe { border: 0; color-scheme: light dark; pointer-events: none; }
-  .sc-bar { position: absolute; top: 0; left: 0; right: 0; height: 54px; background: rgb(19, 37, 61); color: #fff; }
-  .sc-bar span { position: absolute; left: 0; top: 12px; width: 134px; height: 35px; display: flex; align-items: center; justify-content: center; font: 600 17px/1 system-ui, sans-serif; }
-  .sc-bar i { position: absolute; left: 134px; top: 12px; width: 122px; height: 35px; border-radius: 17.5px; background: #000; }
-  .sc-ico { position: absolute; left: 289px; top: 22.5px; width: 68px; height: 14px; fill: currentColor; }
-  .sc-vw { position: absolute; top: 54px; left: 0; right: 0; bottom: 0; overflow: hidden; }
   /* kézben tartott iPhone a MacBook alatt (ALCUFER): a kar jobbra fut ki, ezért jobbra zárt */
   .duo.hand { width: 68%; margin: -2% -2% 0 auto; }
   @media (max-width: 700px) {
@@ -395,34 +390,25 @@
 
       <div class="shots">
         <figure class="scene" id="jxScene">
-          <div class="sc-box" style="aspect-ratio:1876/1188" data-w="1876">
-            <div class="sc-in" style="width:1876px;height:1188px">
-              <img class="sc-base" src="work/duo-alap.webp" width="1876" height="1188" alt="" />
-              <div class="sc-mask" style="-webkit-mask-image:url(work/duo-maszk-laptop.png);mask-image:url(work/duo-maszk-laptop.png)">
-                <div class="sc-scr" style="width:1440px;height:920px;transform:matrix3d(0.98710503,-0.00091712831,0,-1.8891715e-06,0.0010645439,0.98726942,0,-2.6337207e-06,0,0,1,0,248.95139,75.381378,0,1)">
+          <div class="sc-box" style="aspect-ratio:1879/1188" data-w="1879">
+            <div class="sc-in" style="width:1879px;height:1188px">
+              <img class="sc-base" src="work/laptop-alap.webp" width="1879" height="1188" alt="" />
+              <div class="sc-mask" style="-webkit-mask-image:url(work/laptop-maszk-laptop.png);mask-image:url(work/laptop-maszk-laptop.png)">
+                <div class="sc-scr" style="width:1440px;height:920px;transform:matrix3d(0.98715263,-0.00091712831,0,-1.8891715e-06,0.0011309137,0.98726942,0,-2.6337207e-06,0,0,1,0,223.75139,75.381378,0,1)">
                   <img src="work/jozsa-intro-bg.webp" width="1440" height="920" alt="" />
                   <iframe id="jxIntroD" title="" tabindex="-1" aria-hidden="true" style="width:1440px;height:920px"></iframe>
                 </div>
               </div>
-              <div class="sc-mask" style="-webkit-mask-image:url(work/duo-maszk-phone.png);mask-image:url(work/duo-maszk-phone.png)">
-                <div class="sc-scr sc-phone" style="width:390px;height:847px;transform:matrix3d(0.90923077,0,0,0,0,0.92486423,0,0,0,0,1,0,49.68,359.64,0,1)">
-                  <div class="sc-bar"><span>9:41</span><i></i><svg class="sc-ico" viewBox="0 0 68 14" aria-hidden="true"><rect x="0" y="8.75" width="3" height="4" rx=".8"/><rect x="4.5" y="6.25" width="3" height="6.5" rx=".8"/><rect x="9" y="3.75" width="3" height="9" rx=".8"/><rect x="13.5" y="1.25" width="3" height="11.5" rx=".8"/><path d="M17.5 4.01A12 12 0 0 1 34.5 4.01M20.34 6.84A8 8 0 0 1 31.66 6.84" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M26 12.5L23.45 9.95A3.6 3.6 0 0 1 28.55 9.95Z"/><rect x="42.55" y="1.05" width="22.9" height="11.9" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.1"/><rect x="44" y="3" width="20" height="8" rx="2"/><rect x="67" y="5" width="1.5" height="4" rx=".7"/></svg></div>
-                  <div class="sc-vw">
-                    <img src="work/jozsa-phone-screen.webp" width="390" height="800" alt="" />
-                    <iframe id="jxIntroM" title="" tabindex="-1" aria-hidden="true" style="width:390px;height:800px"></iframe>
-                  </div>
-                </div>
-              </div>
-              <img class="sc-fx" src="work/duo-fx0.webp" alt="" style="mix-blend-mode:multiply" />
-              <img class="sc-fx" src="work/duo-fx1.webp" alt="" style="mix-blend-mode:multiply" />
-              <img class="sc-fx" src="work/duo-fx2.webp" alt="" style="mix-blend-mode:plus-lighter" />
+              <img class="sc-fx" src="work/laptop-fx0.webp" alt="" style="mix-blend-mode:multiply" />
+              <img class="sc-fx" src="work/laptop-fx1.webp" alt="" style="mix-blend-mode:multiply" />
+              <img class="sc-fx" src="work/laptop-fx2.webp" alt="" style="mix-blend-mode:plus-lighter" />
             </div>
           </div>
           <figcaption>
-            <span><b>Logo intro, live on both screens</b> The blueprint becomes a building: the outline is drawn, the base drops in, the columns rise, a crane sets the roof — then the screen splits open onto the site.</span>
+            <span><b>Logo intro</b> The blueprint becomes a building: the outline is drawn, the base drops in, the columns rise, a crane sets the roof — then the screen splits open onto the site.</span>
             <button class="intro-btn" id="jxToggle" type="button" aria-pressed="false">Pause</button>
           </figcaption>
-          <span class="sr-only">The new Józsa website on a MacBook and an iPhone, playing its animated logo intro.</span>
+          <span class="sr-only">The new Józsa website on a MacBook, playing its animated logo intro.</span>
         </figure>
         <div class="shot"><img src="work/jozsa-detail.webp" width="1440" height="900" alt="Józsa concept: concrete price list and delivery cost calculator" loading="lazy" /></div>
       </div>
@@ -479,16 +465,15 @@
     });
   })();
   (function () {
-    // Józsa logo intro inside the MacBook + iPhone scene — both screens start together and loop
+    // Józsa logo intro on the MacBook screen — loops
     // while on screen; Pause stops the loop after the current run
     var boxes = Array.prototype.map.call(document.querySelectorAll('#jxScene .sc-box'), function (b) {
       return { box: b, in: b.querySelector('.sc-in'), w: +b.getAttribute('data-w') };
     });
     var box = boxes[0].box;
     var desk = document.getElementById('jxIntroD');
-    var mob = document.getElementById('jxIntroM');
     var btn = document.getElementById('jxToggle');
-    if (!desk || !mob || !btn) return;
+    if (!desk || !btn) return;
     var PERIOD = 6500, timer = null, visible = false, paused = false;
     function fit() {
       boxes.forEach(function (b) { b.in.style.setProperty('--s', b.box.clientWidth / b.w); });
@@ -497,7 +482,6 @@
       clearTimeout(timer);
       var v = '?' + Date.now();
       desk.src = 'work/jozsa-intro.html' + v;
-      mob.src = 'work/jozsa-intro-mobil.html' + v;
       if (!paused) timer = setTimeout(function () { if (visible && !paused) play(); }, PERIOD);
     }
     fit();
