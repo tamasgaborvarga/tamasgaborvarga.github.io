@@ -194,8 +194,11 @@
   .sc-bar i { position: absolute; left: 134px; top: 12px; width: 122px; height: 35px; border-radius: 17.5px; background: #000; }
   .sc-ico { position: absolute; left: 289px; top: 22.5px; width: 68px; height: 14px; fill: currentColor; }
   .sc-vw { position: absolute; top: 54px; left: 0; right: 0; bottom: 0; overflow: hidden; }
+  /* kézben tartott iPhone a MacBook alatt (ALCUFER): a kar jobbra fut ki, ezért jobbra zárt */
+  .duo.hand { width: 68%; margin: -2% -2% 0 auto; }
   @media (max-width: 700px) {
     .duo, .scene { margin-left: -24px; margin-right: -24px; }
+    .duo.hand { width: auto; margin: 6px -24px 0 0; }
     .scene figcaption { padding-left: 24px; padding-right: 24px; }
   }
   .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -325,8 +328,12 @@
 
       <div class="shots">
         <figure class="duo">
-          <img class="duo-l" src="work/alcufer-duo-light.webp" width="1876" height="1188" alt="New ALCUFER website concept on a MacBook and an iPhone" loading="lazy" />
-          <img class="duo-d" src="work/alcufer-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
+          <img class="duo-l" src="work/alcufer-laptop-light.webp" width="1879" height="1188" alt="New ALCUFER website concept on a MacBook" loading="lazy" />
+          <img class="duo-d" src="work/alcufer-laptop-dark.webp" width="1879" height="1188" alt="" loading="lazy" />
+        </figure>
+        <figure class="duo hand">
+          <img class="duo-l" src="work/alcufer-kez-light.webp" width="1380" height="1176" alt="New ALCUFER website on an iPhone held in hand" loading="lazy" />
+          <img class="duo-d" src="work/alcufer-kez-dark.webp" width="1380" height="1176" alt="" loading="lazy" />
         </figure>
         <div class="shot"><img src="work/alcufer-detail.webp" width="1440" height="900" alt="ALCUFER concept: five-step process from waste to secondary raw material" loading="lazy" /></div>
       </div>
