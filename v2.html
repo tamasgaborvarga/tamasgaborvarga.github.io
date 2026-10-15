@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Tamás Gábor Varga — Business, Analytics, Digital</title>
+<meta name="description" content="Tamás Gábor Varga — process engineer working on business processes, data analysis and digital products. Selected web and analytics projects." />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#f5f4f0" id="themeColorMeta" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  /* B-változat: editorial + data/product irány, monokróm (akcentusszín nincs — a user döntése) */
+  :root {
+    --bg: #f5f4f0;
+    --surface: #fbfaf7;
+    --ink: #17171a;
+    --ink-2: #3a3a3e;
+    --muted: #6c6b68;
+    --line: #dedcd5;
+    --line-2: #cbc8bf;
+    --shadow: rgba(40, 34, 24, 0.10);
+    --max: 1200px;
+    --gut: clamp(20px, 4vw, 48px);
+    --display: 'Schibsted Grotesk', 'Inter', system-ui, sans-serif;
+  }
+  :root[data-theme="dark"] {
+    --bg: #111112;
+    --surface: #18181a;
+    --ink: #f1efe9;
+    --ink-2: #d6d3cb;
+    --muted: #9b998f;
+    --line: #2a2a2d;
+    --line-2: #3a3a3e;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #111112; --surface: #18181a; --ink: #f1efe9; --ink-2: #d6d3cb;
+      --muted: #9b998f; --line: #2a2a2d; --line-2: #3a3a3e; --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-synthesis: none; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 3px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
+  .nowrap { white-space: nowrap; }
+
+  /* type */
+  .label {
+    font-family: var(--display); font-size: 12px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.025em; line-height: 1.04; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: -0.02em; }
+  .nav-r { display: flex; align-items: center; gap: 28px; }
+  .nav-r a { font-size: 14px; font-weight: 500; color: var(--muted); transition: color .2s; }
+  .nav-r a:hover { color: var(--ink); }
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; border: 0; background: none; color: var(--muted); cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--ink); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .i-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
+  @media (max-width: 560px) { .nav-r { gap: 18px; } .nav-r a.hide-s { display: none; } }
+
+  /* HERO */
+  .hero { padding: clamp(72px, 12vw, 150px) 0 clamp(64px, 9vw, 110px); border-bottom: 1px solid var(--line); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 64px; align-items: end; }
+  @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 56px; } }
+  .hero h1 { font-size: clamp(46px, 8.2vw, 112px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; margin-top: 26px; max-width: 11ch; }
+  .hero .sub { font-size: clamp(17px, 1.6vw, 20px); color: var(--ink-2); max-width: 54ch; margin-top: 30px; line-height: 1.55; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 30px; font-size: 14px; color: var(--muted); }
+  .meta .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--ink); margin-right: 8px; vertical-align: 1px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 999px; font-size: 15px; font-weight: 600;
+    border: 1px solid var(--line-2); transition: background .2s, color .2s, border-color .2s;
+  }
+  .btn:hover { border-color: var(--ink); }
+  .btn.solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .btn.solid:hover { background: var(--ink-2); }
+  .btn .arr { transition: transform .2s; }
+  .btn:hover .arr { transform: translateY(2px); }
+
+  .hero-index { border-top: 1px solid var(--ink); }
+  .hero-index .label { display: block; padding: 14px 0 6px; }
+  .hero-index a {
+    display: grid; grid-template-columns: 34px 1fr auto; gap: 8px; align-items: baseline;
+    padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 500;
+    transition: padding .25s;
+  }
+  .hero-index a span:first-child { font-family: var(--display); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .hero-index a span:last-child { color: var(--muted); font-size: 13px; }
+  .hero-index a:hover { padding-left: 6px; }
+
+  /* SECTIONS */
+  section { padding: clamp(80px, 10vw, 130px) 0; border-bottom: 1px solid var(--line); scroll-margin-top: 64px; }
+  .sec-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; margin-bottom: clamp(48px, 6vw, 80px); }
+  @media (max-width: 860px) { .sec-head { grid-template-columns: 1fr; gap: 18px; } }
+  .sec-head h2 { font-size: clamp(36px, 5.4vw, 68px); margin-top: 14px; }
+  .sec-head p { color: var(--ink-2); font-size: 17px; max-width: 46ch; }
+
+  .group { display: flex; align-items: baseline; gap: 16px; padding: 16px 0; border-top: 1px solid var(--ink); margin: 0 0 40px; }
+  .group h3 { font-size: 22px; letter-spacing: -0.02em; }
+  .group .n { font-family: var(--display); font-weight: 600; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .group p { margin-left: auto; color: var(--muted); font-size: 14px; text-align: right; }
+  @media (max-width: 700px) { .group { flex-wrap: wrap; } .group p { margin-left: 0; text-align: left; width: 100%; } }
+  .group + * { margin-top: 0; }
+  .group-gap { height: clamp(56px, 8vw, 100px); }
+
+  /* PROJECT — feature row */
+  .proj { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(28px, 4vw, 56px); align-items: start; margin-bottom: clamp(64px, 8vw, 104px); }
+  .proj.flip { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .proj.flip .shot { order: 2; }
+  @media (max-width: 860px) { .proj, .proj.flip { grid-template-columns: 1fr; } .proj.flip .shot { order: 0; } }
+  .shot { display: block; position: relative; overflow: hidden; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); box-shadow: 0 18px 40px -18px var(--shadow); }
+  .shot img { width: 100%; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+  .shot:hover img { transform: scale(1.015); }
+  .shot.bare { border: 0; background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+  .shot.bare:hover img { transform: none; }
+  .shot .th-d { display: none; }
+  :root[data-theme="dark"] .shot .th-l { display: none; }
+  :root[data-theme="dark"] .shot .th-d { display: block; }
+
+  .p-head { display: flex; align-items: baseline; gap: 14px; }
+  .p-head .n { font-family: var(--display); font-size: 13px; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .proj h4 { font-family: var(--display); font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; margin-top: 10px; }
+  .proj .lede { font-size: 17px; color: var(--ink-2); margin-top: 14px; }
+  .facts { margin-top: 26px; border-top: 1px solid var(--line); }
+  .facts div { display: grid; grid-template-columns: 96px 1fr; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; line-height: 1.55; }
+  .facts dt { font-family: var(--display); font-size: 11.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .facts dd { color: var(--ink-2); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .tags span { font-size: 12.5px; color: var(--muted); border: 1px solid var(--line-2); border-radius: 999px; padding: 4px 11px; }
+  .go { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-weight: 600; font-size: 15px; border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+  .go .arr { transition: transform .2s; }
+  .go:hover .arr { transform: translate(2px, -2px); }
+
+  /* PROJECT — pair */
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 48px); }
+  @media (max-width: 860px) { .pair { grid-template-columns: 1fr; gap: 64px; } }
+  .pair .proj { grid-template-columns: 1fr; margin-bottom: 0; gap: 28px; }
+  .pair .proj h4 { font-size: clamp(26px, 2.4vw, 32px); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(40px, 6vw, 96px); }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; } }
+  .story p { font-size: clamp(18px, 1.7vw, 21px); line-height: 1.6; color: var(--ink-2); }
+  .story p + p { margin-top: 20px; }
+  .story strong { color: var(--ink); font-weight: 600; }
+  .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 34px; }
+  .skills span { font-size: 14px; font-weight: 500; border: 1px solid var(--line-2); border-radius: 999px; padding: 8px 15px; }
+  .tl { border-top: 1px solid var(--ink); }
+  .tl .label { display: block; padding: 14px 0 4px; }
+  .tl-row { display: grid; grid-template-columns: 112px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .tl-row .when { font-family: var(--display); font-weight: 600; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .tl-row .role { font-weight: 600; font-size: 17px; }
+  .tl-row .org { color: var(--muted); font-size: 15px; margin-top: 2px; }
+
+  /* CONTACT */
+  #contact { border-bottom: 0; }
+  .contact h2 { font-size: clamp(48px, 9vw, 120px); font-weight: 800; letter-spacing: -0.045em; line-height: 0.95; }
+  .contact .sub { color: var(--ink-2); font-size: 18px; margin-top: 24px; max-width: 44ch; }
+  .c-links { display: grid; grid-template-columns: 1fr 1fr; margin-top: 56px; border-top: 1px solid var(--ink); }
+  @media (max-width: 700px) { .c-links { grid-template-columns: 1fr; } }
+  .c-links a { display: flex; flex-direction: column; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .c-links a:first-child { padding-right: 24px; }
+  @media (min-width: 701px) { .c-links a + a { padding-left: 24px; border-left: 1px solid var(--line); } }
+  .c-links .v { font-family: var(--display); font-size: clamp(20px, 2.4vw, 28px); font-weight: 600; letter-spacing: -0.02em; display: flex; justify-content: space-between; gap: 12px; }
+  .c-links .v .arr { transition: transform .2s; }
+  .c-links a:hover .v .arr { transform: translate(3px, -3px); }
+
+  footer { padding: 36px 0 44px; color: var(--muted); font-size: 13px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* reveal */
+  .js .rv { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+  .js .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .js .rv { opacity: 1; transform: none; transition: none; }
+    .shot img, .btn .arr, .go .arr, .hero-index a { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">TGV.</a>
+    <div class="nav-r">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="hide-s">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="label">Business · Analytics · Digital</p>
+      <h1>Turning complexity into clarity.</h1>
+      <p class="sub">I&rsquo;m Tamás Gábor Varga, a process engineer. I combine process thinking, data analysis and digital product development to build practical tools for real problems.</p>
+      <div class="meta">
+        <span><span class="dot"></span>Open to new opportunities</span>
+        <span>Budapest, Hungary</span>
+      </div>
+      <div class="btns">
+        <a class="btn solid" href="#work">Explore projects <span class="arr">↓</span></a>
+        <a class="btn" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-index">
+      <span class="label">Selected work</span>
+      <a href="#p-concepts"><span>01</span><span>Website Concepts</span><span>Web</span></a>
+      <a href="#p-physio"><span>02</span><span>Physio &amp; More</span><span>Web</span></a>
+      <a href="#p-jsa"><span>03</span><span>Job Search Analytics</span><span>Data</span></a>
+      <a href="#p-worldcup"><span>04</span><span>World Cup Tipping Game</span><span>Data</span></a>
+      <a href="#p-holdudvar"><span>05</span><span>Holdudvar Analytics</span><span>Data</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="label">Work</p>
+        <h2>Selected projects</h2>
+      </div>
+      <p>Built outside my day job, each one around a real problem — and each one live, so you can try it yourself.</p>
+    </div>
+
+    <div class="group rv"><span class="n">01</span><h3>Web &amp; Digital Products</h3><p>Websites and digital experiences for businesses</p></div>
+
+    <article class="proj rv" id="p-concepts">
+      <a class="shot bare" href="work.html" aria-label="Website Concepts case studies">
+        <img class="th-l" src="work/kertvellesy-duo-light.webp" width="1876" height="1188" alt="Kertvéllesy website concept on a MacBook and an iPhone" loading="lazy" />
+        <img class="th-d" src="work/kertvellesy-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
+      </a>
+      <div>
+        <div class="p-head"><span class="n">01</span><span class="label">Web design · UX · Content</span></div>
+        <h4>Website Concepts</h4>
+        <p class="lede">New website concepts for three Hungarian businesses — an architecture studio, a metal recycler and a concrete supplier.</p>
+        <dl class="facts">
+          <div><dt>Goal</dt><dd>Show each business what its website could be, built from its own content, photos and prices.</dd></div>
+          <div><dt>Built</dt><dd>Three full redesigns: content migrated from the old sites, a new logo for ALCUFER, a live logo intro for Józsa.</dd></div>
+          <div><dt>Live</dt><dd>All three concepts are online; the case studies show the starting point next to the result.</dd></div>
+        </dl>
+        <div class="tags"><span>Redesign</span><span>Brand identity</span><span>Content migration</span><span>Technical SEO</span></div>
+        <a class="go" href="work.html">Read the case studies <span class="arr">↗</span></a>
+      </div>
+    </article>
+
+    <article class="proj flip rv" id="p-physio">
+      <a class="shot" href="https://physioandmore.hu/" target="_blank" rel="noopener" aria-label="Open physioandmore.hu">
+        <img src="v2/physio.webp" width="1440" height="900" alt="Physio &amp; More homepage: headline over a photo of the treatment room" loading="lazy" />
+      </a>
+      <div>
+        <div class="p-head"><span class="n">02</span><span class="label">Web development · Responsive UI</span></div>
+        <h4>Physio &amp; More</h4>
+        <p class="lede">Custom-designed website for a physiotherapy practice in Tiszafüred.</p>
+        <dl class="facts">
+          <div><dt>Goal</dt><dd>A calm, trustworthy first impression that leads visitors to book an appointment.</dd></div>
+          <div><dt>Built</dt><dd>A responsive single page: about, services, gallery, price list and contact, with booking calls to action.</dd></div>
+          <div><dt>Live</dt><dd>Running on the practice&rsquo;s own domain.</dd></div>
+        </dl>
+        <div class="tags"><span>Static HTML</span><span>Tailwind CSS</span><span>Vanilla JS</span></div>
+        <a class="go" href="https://physioandmore.hu/" target="_blank" rel="noopener">physioandmore.hu <span class="arr">↗</span></a>
+      </div>
+    </article>
+
+    <div class="group-gap"></div>
+    <div class="group rv"><span class="n">02</span><h3>Analytics &amp; Business Tools</h3><p>Dashboards that turn messy data into decisions</p></div>
+
+    <article class="proj rv" id="p-jsa">
+      <a class="shot" href="https://job-search-analytics.vtamasgabor.workers.dev/" target="_blank" rel="noopener" aria-label="Open Job Search Analytics">
+        <img src="v2/jsa.webp" width="1440" height="900" alt="Job Search Analytics dashboard: KPI row, application-flow Sankey, applications over time" loading="lazy" />
+      </a>
+      <div>
+        <div class="p-head"><span class="n">03</span><span class="label">Data analytics · Dashboard · Product thinking</span></div>
+        <h4>Job Search Analytics</h4>
+        <p class="lede">My own job search, tracked the way I&rsquo;d tackle any business process.</p>
+        <dl class="facts">
+          <div><dt>Goal</dt><dd>Measure what actually happens to applications instead of going on gut feeling.</dd></div>
+          <div><dt>Built</dt><dd>A single-file dashboard: KPI row, a hand-drawn SVG Sankey of the application flow, response and rejection timing, breakdowns by location and role.</dd></div>
+          <div><dt>Live</dt><dd>Based on 89 anonymised applications from my own log.</dd></div>
+        </dl>
+        <div class="tags"><span>Vanilla JS</span><span>Chart.js</span><span>SVG</span><span>Cloudflare Workers</span></div>
+        <a class="go" href="https://job-search-analytics.vtamasgabor.workers.dev/" target="_blank" rel="noopener">Open the dashboard <span class="arr">↗</span></a>
+      </div>
+    </article>
+
+    <div class="pair">
+      <article class="proj rv" id="p-worldcup">
+        <a class="shot" href="https://zollner-2026-vb.vtamasgabor.workers.dev" target="_blank" rel="noopener" aria-label="Open the World Cup tipping game dashboard">
+          <img src="v2/worldcup.webp" width="1440" height="900" alt="World Cup tipping game dashboard: points race chart and leaderboard, player names blurred" loading="lazy" />
+        </a>
+        <div>
+          <div class="p-head"><span class="n">04</span><span class="label">Statistical modelling · Visualisation</span></div>
+          <h4>World Cup Tipping Game</h4>
+          <dl class="facts">
+            <div><dt>Goal</dt><dd>Make an office World Cup 2026 tipping game easier — and more fun — to follow.</dd></div>
+            <div><dt>Built</dt><dd>Live leaderboard, an animated points race, head-to-head comparison and Monte Carlo–simulated odds.</dd></div>
+            <div><dt>Live</dt><dd>63 players across 104 matches.</dd></div>
+          </dl>
+          <a class="go" href="https://zollner-2026-vb.vtamasgabor.workers.dev" target="_blank" rel="noopener">Open the dashboard <span class="arr">↗</span></a>
+        </div>
+      </article>
+
+      <article class="proj rv" id="p-holdudvar">
+        <a class="shot" href="holdudvar.html" target="_blank" rel="noopener" aria-label="Open Holdudvar Vendégház Analytics">
+          <img src="v2/holdudvar.webp" width="1440" height="900" alt="Holdudvar Vendégház Analytics: season filters, KPI cards and seasonal demand chart" loading="lazy" />
+        </a>
+        <div>
+          <div class="p-head"><span class="n">05</span><span class="label">Hospitality · Business intelligence</span></div>
+          <h4>Holdudvar Vendégház Analytics</h4>
+          <dl class="facts">
+            <div><dt>Goal</dt><dd>Understand demand at our family guesthouse in Tiszafüred.</dd></div>
+            <div><dt>Built</dt><dd>Booking analytics on six seasons of self-collected data: seasonality, sales channels and guest profile, in English and Hungarian.</dd></div>
+            <div><dt>Live</dt><dd>Interactive season filters, 2021–2026.</dd></div>
+          </dl>
+          <a class="go" href="holdudvar.html" target="_blank" rel="noopener">Open the dashboard <span class="arr">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div>
+        <p class="label">About</p>
+        <h2>From the shop floor to business problems</h2>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="story rv">
+        <p>I started in manufacturing. Over four years as a process engineer taught me to approach problems systematically: <strong>map the process, measure it, then change it.</strong></p>
+        <p>Along the way I realised I enjoy business problems more than machine problems — so I started building analytics tools and digital products in my free time. Now I want to bring that mindset into business process and analysis roles.</p>
+        <div class="skills">
+          <span>Process optimisation</span><span>Data analysis</span><span>Product thinking</span><span>Agile / Scrum</span><span>Stakeholder communication</span><span>AI &amp; prompt engineering</span>
+        </div>
+      </div>
+      <div class="tl rv">
+        <span class="label">Background</span>
+        <div class="tl-row"><div class="when">2025–2026</div><div><div class="role">Process Engineer</div><div class="org">Zollner Elektronik</div></div></div>
+        <div class="tl-row"><div class="when">2021–2024</div><div><div class="role">Process Engineer</div><div class="org">Samsung SDI Hungary</div></div></div>
+        <div class="tl-row"><div class="when">2017–2021</div><div><div class="role">BSc, Engineering &amp; Industrial Management</div><div class="org">Óbuda University</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="label rv">Contact</p>
+    <h2 class="rv">Let&rsquo;s talk.</h2>
+    <p class="sub rv">Open to business process and analysis roles — and to conversations about websites and digital tools.</p>
+    <div class="c-links rv">
+      <a href="mailto:vtamasgabor@gmail.com"><span class="label">Email</span><span class="v"><span class="nowrap">vtamasgabor@gmail.com</span><span class="arr">↗</span></span></a>
+      <a href="https://www.linkedin.com/in/vargatamasgabor/" target="_blank" rel="noopener"><span class="label">LinkedIn</span><span class="v"><span class="nowrap">in/vargatamasgabor</span><span class="arr">↗</span></span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Tamás Gábor Varga</span><a href="#top">Back to top ↑</a></div>
+</footer>
+
+<script>
+  (function () {
+    var THEME_COLORS = { light: '#f5f4f0', dark: '#111112' };
+    var root = document.documentElement;
+    var meta = document.getElementById('themeColorMeta');
+    function apply(theme) { root.setAttribute('data-theme', theme); if (meta) meta.setAttribute('content', THEME_COLORS[theme]); }
+    apply(root.getAttribute('data-theme') || 'light');
+    document.getElementById('themeToggle').addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      apply(next);
+    });
+  })();
+
+  (function () {
+    // Finom megjelenés görgetéskor; mozgáscsökkentésnél a CSS kikapcsolja
+    if (!('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('js');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+  })();
+</script>
+</body>
+</html>
