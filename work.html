@@ -170,8 +170,8 @@
   .logo-sym { width: 64px; }
   .logo-stk { width: min(100%, 150px); }
   .logo-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 10px; }
-  .logo-card figcaption, .intro-unit figcaption { font-size: 13px; line-height: 1.55; color: var(--muted); padding: 2px 4px 4px; }
-  .logo-card b, .intro-unit b { display: block; color: var(--text); font-weight: 600; margin-bottom: 2px; }
+  .logo-card figcaption, .scene figcaption { font-size: 13px; line-height: 1.55; color: var(--muted); padding: 2px 4px 4px; }
+  .logo-card b, .scene figcaption b { display: block; color: var(--text); font-weight: 600; margin-bottom: 2px; }
 
   .metals { list-style: none; display: flex; flex-direction: column; border-top: 1px solid var(--border); margin: 0 4px; }
   .metals li { display: grid; grid-template-columns: 14px 28px 1fr auto; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
@@ -180,11 +180,21 @@
   .metals span:not(.sw) { color: var(--muted); }
   .metals em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--muted); }
   .logo-note { font-size: 12px; color: var(--muted); padding: 2px 4px 4px; }
-  .intro-stage { position: relative; aspect-ratio: 1440 / 920; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: var(--card); box-shadow: 0 12px 30px var(--shadow); }
-  .intro-stage img, .intro-stage iframe { position: absolute; top: 0; left: 0; }
-  .intro-stage img { width: 100%; height: 100%; }
-  .intro-stage iframe { color-scheme: light dark; width: 1440px; height: 920px; border: 0; transform-origin: 0 0; transform: scale(var(--s, 0.6)); pointer-events: none; }
-  .intro-unit figcaption { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-top: 12px; }
+  .scene { margin: 0 -2%; }
+  .sc-box { position: relative; aspect-ratio: 1876 / 1188; overflow: hidden; }
+  .sc-in { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--s, 0.5)); }
+  .sc-base, .sc-fx, .sc-mask { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .sc-fx { pointer-events: none; }
+  .sc-mask { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+  .sc-scr { position: absolute; top: 0; left: 0; transform-origin: 0 0; overflow: hidden; background: #000; }
+  .sc-scr > img, .sc-vw > img, .sc-scr iframe { position: absolute; top: 0; left: 0; }
+  .sc-scr iframe { border: 0; color-scheme: light dark; pointer-events: none; }
+  .sc-bar { position: absolute; top: 0; left: 0; right: 0; height: 47px; background: rgb(19, 37, 61); color: #fff; font: 600 16px/1 system-ui, sans-serif; }
+  .sc-bar span { position: absolute; left: 40px; top: 17px; }
+  .sc-bar i { position: absolute; left: 133px; top: 11px; width: 124px; height: 34px; border-radius: 18px; background: #000; }
+  .sc-vw { position: absolute; top: 47px; left: 0; width: 390px; height: 800px; overflow: hidden; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .scene figcaption { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-top: 12px; }
   .intro-btn {
     flex: none; font: 600 13px/1 'Inter', sans-serif; color: var(--text);
     padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--card); cursor: pointer;
@@ -372,19 +382,35 @@
       <p class="where">Ready-mix concrete &amp; building supply store · Tiszafüred</p>
 
       <div class="shots">
-        <figure class="duo">
-          <img class="duo-l" src="work/jozsa-duo-light.webp" width="1876" height="1188" alt="New Józsa website concept on a MacBook and an iPhone" loading="lazy" />
-          <img class="duo-d" src="work/jozsa-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
-        </figure>
-        <figure class="intro-unit">
-          <div class="intro-stage" id="jxStage">
-            <img src="work/jozsa-intro-bg.webp" width="1440" height="920" alt="" />
-            <iframe id="jxIntro" title="Józsa logo intro animation" tabindex="-1" aria-hidden="true"></iframe>
+        <figure class="scene" id="jxScene">
+          <div class="sc-box">
+            <div class="sc-in" style="width:1876px;height:1188px">
+              <img class="sc-base" src="work/duo-alap.webp" width="1876" height="1188" alt="" />
+              <div class="sc-mask" style="-webkit-mask-image:url(work/duo-maszk-laptop.png);mask-image:url(work/duo-maszk-laptop.png)">
+                <div class="sc-scr" style="width:1440px;height:920px;transform:matrix3d(0.98710503,-0.00091712831,0,-1.8891715e-06,0.0010645439,0.98726942,0,-2.6337207e-06,0,0,1,0,248.95139,75.381378,0,1)">
+                  <img src="work/jozsa-intro-bg.webp" width="1440" height="920" alt="" />
+                  <iframe id="jxIntroD" title="" tabindex="-1" aria-hidden="true" style="width:1440px;height:920px"></iframe>
+                </div>
+              </div>
+              <div class="sc-mask" style="-webkit-mask-image:url(work/duo-maszk-phone.png);mask-image:url(work/duo-maszk-phone.png)">
+                <div class="sc-scr sc-phone" style="width:390px;height:847px;transform:matrix3d(0.90923077,0,0,0,0,0.92486423,0,0,0,0,1,0,49.68,359.64,0,1)">
+                  <div class="sc-bar"><span>9:41</span><i></i></div>
+                  <div class="sc-vw">
+                    <img src="work/jozsa-phone-screen.webp" width="390" height="800" alt="" />
+                    <iframe id="jxIntroM" title="" tabindex="-1" aria-hidden="true" style="width:390px;height:800px"></iframe>
+                  </div>
+                </div>
+              </div>
+              <img class="sc-fx" src="work/duo-fx0.webp" alt="" style="mix-blend-mode:multiply" />
+              <img class="sc-fx" src="work/duo-fx1.webp" alt="" style="mix-blend-mode:multiply" />
+              <img class="sc-fx" src="work/duo-fx2.webp" alt="" style="mix-blend-mode:plus-lighter" />
+            </div>
           </div>
           <figcaption>
-            <span><b>Logo intro</b> The blueprint becomes a building: the outline is drawn, the base drops in, the columns rise, a crane sets the roof — then the screen splits open onto the site.</span>
+            <span><b>Logo intro, live on both screens</b> The blueprint becomes a building: the outline is drawn, the base drops in, the columns rise, a crane sets the roof — then the screen splits open onto the site.</span>
             <button class="intro-btn" id="jxToggle" type="button" aria-pressed="false">Pause</button>
           </figcaption>
+          <span class="sr-only">The new Józsa website on a MacBook and an iPhone, playing its animated logo intro.</span>
         </figure>
         <div class="shot"><img src="work/jozsa-detail.webp" width="1440" height="900" alt="Józsa concept: concrete price list and delivery cost calculator" loading="lazy" /></div>
       </div>
@@ -441,20 +467,25 @@
     });
   })();
   (function () {
-    // Józsa logo intro — loops while on screen; Pause stops the loop after the current run
-    var stage = document.getElementById('jxStage');
-    var frame = document.getElementById('jxIntro');
+    // Józsa logo intro inside the MacBook + iPhone scene — both screens start together and loop
+    // while on screen; Pause stops the loop after the current run
+    var box = document.querySelector('#jxScene .sc-box');
+    var inner = document.querySelector('#jxScene .sc-in');
+    var desk = document.getElementById('jxIntroD');
+    var mob = document.getElementById('jxIntroM');
     var btn = document.getElementById('jxToggle');
-    if (!stage || !frame || !btn) return;
+    if (!box || !inner || !desk || !mob || !btn) return;
     var PERIOD = 6500, timer = null, visible = false, paused = false;
-    function fit() { stage.style.setProperty('--s', stage.clientWidth / 1440); }
+    function fit() { inner.style.setProperty('--s', box.clientWidth / 1876); }
     function play() {
       clearTimeout(timer);
-      frame.src = 'work/jozsa-intro.html?' + Date.now();
+      var v = '?' + Date.now();
+      desk.src = 'work/jozsa-intro.html' + v;
+      mob.src = 'work/jozsa-intro-mobil.html' + v;
       if (!paused) timer = setTimeout(function () { if (visible && !paused) play(); }, PERIOD);
     }
     fit();
-    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(stage); else addEventListener('resize', fit);
+    if ('ResizeObserver' in window) new ResizeObserver(fit).observe(box); else addEventListener('resize', fit);
     btn.addEventListener('click', function () {
       paused = !paused;
       btn.textContent = paused ? 'Play' : 'Pause';
@@ -466,7 +497,7 @@
         var was = visible; visible = entries[0].isIntersecting;
         if (visible && !was && !paused) play();
         if (!visible) clearTimeout(timer);
-      }, { threshold: 0.4 }).observe(stage);
+      }, { threshold: 0.4 }).observe(box);
     } else { visible = true; play(); }
   })();
 </script>
