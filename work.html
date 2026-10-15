@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Website Concepts — Tamás Gábor Varga</title>
+<meta name="description" content="Website redesign concepts for Hungarian businesses — what each site looked like before, and what I built from it." />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#f7f8fa" id="themeColorMeta" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Website Concepts — Tamás Gábor Varga" />
+<meta property="og:description" content="Website redesign concepts for Hungarian businesses — from the existing site to a new one." />
+<meta property="og:url" content="https://tamasgaborvarga.github.io/work.html" />
+<meta property="og:image" content="https://tamasgaborvarga.github.io/work/kertvellesy-hero.webp" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f7f8fa;
+    --bg-soft: #ffffff;
+    --card: #ffffff;
+    --border: #e3e7ee;
+    --text: #1c1915;
+    --muted: #646874;
+    --accent: #1c1915;
+    --accent-soft: rgba(28, 25, 21, 0.05);
+    --accent-text: #ffffff;
+    --primary-hover: #38342d;
+    --nav-bg: rgba(247, 248, 250, 0.85);
+    --shadow: rgba(26, 34, 51, 0.08);
+    --c-web: #0f766e;
+    --max: 980px;
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #101216;
+    --bg-soft: #16181d;
+    --card: #16181d;
+    --border: #2b2e36;
+    --text: #f2f0ea;
+    --muted: #9a9ea8;
+    --accent: #f2f0ea;
+    --accent-soft: rgba(242, 240, 234, 0.08);
+    --accent-text: #1c1915;
+    --primary-hover: #dbd7ce;
+    --nav-bg: rgba(16, 18, 22, 0.85);
+    --shadow: rgba(0, 0, 0, 0.4);
+    --c-web: #34c3b5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101216;
+      --bg-soft: #16181d;
+      --card: #16181d;
+      --border: #2b2e36;
+      --text: #f2f3f5;
+      --muted: #9a9ea8;
+      --accent: #f2f3f5;
+      --accent-soft: rgba(242, 243, 245, 0.08);
+      --accent-text: #16181d;
+      --primary-hover: #d8dadd;
+      --nav-bg: rgba(16, 18, 22, 0.85);
+      --shadow: rgba(0, 0, 0, 0.4);
+      --c-web: #34c3b5;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background .3s ease, color .3s ease;
+  }
+  h1, h2, h3 { font-family: 'Space Grotesk', 'Inter', sans-serif; line-height: 1.2; }
+  h2 { font-size: 28px; letter-spacing: -0.015em; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  nav .brand { font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; letter-spacing: 0.01em; }
+  .nav-right { display: flex; align-items: center; }
+  .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; font-weight: 500; transition: color .2s; }
+  .back:hover { color: var(--text); }
+  .theme-toggle {
+    flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: 34px; margin-left: 20px;
+    border: none; background: none; color: var(--muted);
+    transition: color .2s;
+  }
+  .theme-toggle:hover { color: var(--text); }
+  .theme-toggle svg { width: 19px; height: 19px; }
+  .theme-toggle .i-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .i-sun { display: block; }
+  :root[data-theme="dark"] .theme-toggle .i-moon { display: none; }
+
+  /* INTRO */
+  .intro { padding: 96px 0 72px; border-bottom: 1px solid var(--border); }
+  .eyebrow {
+    font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 18px;
+  }
+  .intro h1 { font-size: clamp(32px, 5vw, 46px); font-weight: 700; letter-spacing: -0.02em; max-width: 16ch; }
+  .lead-para { color: var(--muted); font-size: 17px; max-width: 640px; margin-top: 20px; }
+  .index { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+  .index a {
+    font-size: 14px; font-weight: 500;
+    padding: 9px 16px; border-radius: 999px;
+    background: var(--accent-soft); border: 1px solid var(--border);
+    transition: border-color .2s;
+  }
+  .index a:hover { border-color: var(--accent); }
+
+  /* CASE */
+  .case { padding: 84px 0; border-bottom: 1px solid var(--border); scroll-margin-top: 62px; }
+  .case:last-of-type { border-bottom: none; }
+  .cat {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Space Grotesk'; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted);
+  }
+  .cat::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--c-web); }
+  .case h2 { margin-top: 10px; }
+  .case .where { color: var(--muted); font-size: 15px; margin-top: 6px; }
+
+  .shots { display: grid; grid-template-columns: 1fr 190px; gap: 16px; align-items: end; margin-top: 34px; }
+  .shot {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    background: var(--card); box-shadow: 0 12px 30px var(--shadow);
+  }
+  .shot.phone { border-radius: 26px; border-width: 5px; border-color: var(--text); }
+  .shot.wide { grid-column: 1 / -1; }
+  @media (max-width: 700px) {
+    .shots { grid-template-columns: 1fr; }
+    .shot.phone { width: 62%; justify-self: center; }
+  }
+
+  .story { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
+  @media (max-width: 700px) { .story { grid-template-columns: 1fr; } }
+  .story > div { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; }
+  .story h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+    font-weight: 600; margin-bottom: 10px;
+  }
+  .story ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .story li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.55; }
+  .story li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 1px; background: var(--muted); }
+
+  .case-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .meta span { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 3px 10px; border-radius: 999px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 999px; font-size: 14px; font-weight: 600;
+    background: var(--accent); border: 1px solid var(--accent); color: var(--accent-text);
+    transition: background .2s, transform .2s;
+  }
+  .btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+
+  .note { color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+  footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; animation: none !important; }
+    .btn:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="index.html">Tamás Gábor Varga</a>
+    <div class="nav-right">
+      <a class="back" href="index.html#projects">← Back to portfolio</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="intro">
+  <div class="wrap">
+    <p class="eyebrow">Website concepts</p>
+    <h1>From an existing site to a new one</h1>
+    <p class="lead-para">
+      New website concepts for Hungarian businesses. Each one starts from the company&rsquo;s
+      current site: I collect its real content, photos and prices, measure where the site
+      falls short, then rebuild it from that material — nothing invented.
+    </p>
+    <div class="index">
+      <a href="#kertvellesy">Kertvéllesy Architects</a>
+      <a href="#alcufer">ALCUFER</a>
+      <a href="#jozsa">Józsa Kft.</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- KERTVÉLLESY -->
+  <section class="case" id="kertvellesy">
+    <div class="wrap">
+      <span class="cat">Website concept · 2026</span>
+      <h2>New website concept for Kertvéllesy Architects</h2>
+      <p class="where">Architecture studio · Pécs</p>
+
+      <div class="shots">
+        <div class="shot"><img src="work/kertvellesy-hero.webp" width="1440" height="900" alt="Kertvéllesy concept homepage: full-screen architectural render with the studio's motto" loading="lazy" /></div>
+        <div class="shot phone"><img src="work/kertvellesy-phone.webp" width="585" height="1266" alt="Kertvéllesy concept on a phone" loading="lazy" /></div>
+        <div class="shot wide"><img src="work/kertvellesy-detail.webp" width="1440" height="900" alt="Kertvéllesy concept: the services chapter — design, interiors, project management" loading="lazy" /></div>
+      </div>
+
+      <div class="story">
+        <div>
+          <h3>Starting point</h3>
+          <ul>
+            <li>58-page WordPress site (WPML, Visual Composer, Slider Revolution)</li>
+            <li>Phone numbers not tappable on any page; pinch-zoom disabled on phones</li>
+            <li>No page descriptions for Google, no share image, no structured company data</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What I built</h3>
+          <ul>
+            <li>60-page static site generated by a Python build from the original content</li>
+            <li>243 project images converted to responsive WebP</li>
+            <li>Editorial look with its own type pairing, full-screen menu, filterable project archive</li>
+            <li>Animated logo intro, light/dark theme, tap-to-call everywhere</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-foot">
+        <div class="meta"><span>Python build</span><span>Static HTML</span><span>Content migration</span><span>Responsive images</span></div>
+        <a class="btn" href="https://tamasgaborvarga.github.io/kertvellesy-eoeon7gd/" target="_blank" rel="noopener">View live concept →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALCUFER -->
+  <section class="case" id="alcufer">
+    <div class="wrap">
+      <span class="cat">Identity &amp; website concept · 2026</span>
+      <h2>New website concept for ALCUFER</h2>
+      <p class="where">Industrial waste &amp; metal recycling · Győr · 20 sites</p>
+
+      <div class="shots">
+        <div class="shot"><img src="work/alcufer-hero.webp" width="1440" height="900" alt="ALCUFER concept homepage: dark hero with the headline and quote button" loading="lazy" /></div>
+        <div class="shot phone"><img src="work/alcufer-phone.webp" width="585" height="1266" alt="ALCUFER concept on a phone" loading="lazy" /></div>
+        <div class="shot wide"><img src="work/alcufer-detail.webp" width="1440" height="900" alt="ALCUFER concept: five-step process from waste to secondary raw material" loading="lazy" /></div>
+      </div>
+
+      <div class="story">
+        <div>
+          <h3>Starting point</h3>
+          <ul>
+            <li>No mobile layout — phones got the desktop page scaled down from 1240 px</li>
+            <li>Page title in Google: &ldquo;Magyar — Alcufer Kft.&rdquo;; no H1, page descriptions or share image</li>
+            <li>Logo available only as a 254×74 px raster image</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What I built</h3>
+          <ul>
+            <li>New identity: vector logo in 16 variants, copper–steel–aluminium palette with material colour codes</li>
+            <li>Fully responsive site from 320 px, with a site finder for the 20 locations</li>
+            <li>12 business lines, each with its own page; validated quote request form</li>
+            <li>Unique titles, descriptions and structured data on every page</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-foot">
+        <div class="meta"><span>Next.js</span><span>Tailwind CSS</span><span>Brand identity</span><span>Technical SEO</span></div>
+        <a class="btn" href="https://tamasgaborvarga.github.io/alcufer-b2-zezl2s5a/" target="_blank" rel="noopener">View live concept →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JÓZSA -->
+  <section class="case" id="jozsa">
+    <div class="wrap">
+      <span class="cat">Website concept · 2026</span>
+      <h2>New website concept for Józsa Kft.</h2>
+      <p class="where">Ready-mix concrete &amp; building supply store · Tiszafüred</p>
+
+      <div class="shots">
+        <div class="shot"><img src="work/jozsa-hero.webp" width="1440" height="900" alt="Józsa concept homepage: headline, concrete order and store buttons, photos of the plant and store" loading="lazy" /></div>
+        <div class="shot phone"><img src="work/jozsa-phone.webp" width="585" height="1266" alt="Józsa concept on a phone" loading="lazy" /></div>
+        <div class="shot wide"><img src="work/jozsa-detail.webp" width="1440" height="900" alt="Józsa concept: concrete price list and delivery cost calculator" loading="lazy" /></div>
+      </div>
+
+      <div class="story">
+        <div>
+          <h3>Starting point</h3>
+          <ul>
+            <li>Joomla 3.6.5 site from 2016, no longer supported</li>
+            <li>Concrete prices not on the site; no page descriptions on any page</li>
+            <li>On phones, a grant-funding sticker covered the logo</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What I built</h3>
+          <ul>
+            <li>Price list for every concrete class plus a delivery cost calculator, from the company&rsquo;s price sheet</li>
+            <li>Opening hours and main phone number in the header; call and directions buttons</li>
+            <li>Logo redrawn as a vector; animated logo intro</li>
+            <li>Self-hosted fonts, skip link, full keyboard navigation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="case-foot">
+        <div class="meta"><span>Static HTML</span><span>Vanilla JS</span><span>Calculator UX</span><span>Accessibility</span></div>
+        <a class="btn" href="https://tamasgaborvarga.github.io/jozsa-68mib/" target="_blank" rel="noopener">View live concept →</a>
+      </div>
+      <p class="note">These are self-initiated concepts and were not commissioned. The companies&rsquo; own websites are unchanged.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Tamás Gábor Varga</div>
+</footer>
+
+<script>
+  (function () {
+    var THEME_COLORS = { light: '#f7f8fa', dark: '#101216' };
+    var root = document.documentElement;
+    var toggle = document.getElementById('themeToggle');
+    var meta = document.getElementById('themeColorMeta');
+    function apply(theme) {
+      root.setAttribute('data-theme', theme);
+      if (meta) meta.setAttribute('content', THEME_COLORS[theme]);
+    }
+    apply(root.getAttribute('data-theme') || 'light');
+    toggle.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      apply(next);
+    });
+  })();
+</script>
+</body>
+</html>
