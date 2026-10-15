@@ -20,7 +20,7 @@
 <meta property="og:title" content="Website Concepts — Tamás Gábor Varga" />
 <meta property="og:description" content="Website redesign concepts for Hungarian businesses — from the existing site to a new one." />
 <meta property="og:url" content="https://tamasgaborvarga.github.io/work.html" />
-<meta property="og:image" content="https://tamasgaborvarga.github.io/work/kertvellesy-hero.webp" />
+<meta property="og:image" content="https://tamasgaborvarga.github.io/work/kertvellesy-duo-light.webp" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%2316181d'/%3E%3Ctext%20x='16'%20y='22'%20font-family='Arial,sans-serif'%20font-size='13'%20font-weight='700'%20fill='white'%20text-anchor='middle'%3ETGV%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -149,16 +149,14 @@
   .case h2 { margin-top: 10px; }
   .case .where { color: var(--muted); font-size: 15px; margin-top: 6px; }
 
-  .shots { display: grid; grid-template-columns: 1fr 190px; gap: 16px; align-items: end; margin-top: 34px; }
+  .shots { display: grid; gap: 22px; margin-top: 30px; }
+  .duo { margin: 0 -2%; }
+  .duo-d { display: none; }
+  :root[data-theme="dark"] .duo-l { display: none; }
+  :root[data-theme="dark"] .duo-d { display: block; }
   .shot {
     border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
     background: var(--card); box-shadow: 0 12px 30px var(--shadow);
-  }
-  .shot.phone { border-radius: 26px; border-width: 5px; border-color: var(--text); }
-  .shot.wide { grid-column: 1 / -1; }
-  @media (max-width: 700px) {
-    .shots { grid-template-columns: 1fr; }
-    .shot.phone { width: 62%; justify-self: center; }
   }
 
   .story { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 30px; }
@@ -236,9 +234,11 @@
       <p class="where">Architecture studio · Pécs</p>
 
       <div class="shots">
-        <div class="shot"><img src="work/kertvellesy-hero.webp" width="1440" height="900" alt="Kertvéllesy concept homepage: full-screen architectural render with the studio's motto" loading="lazy" /></div>
-        <div class="shot phone"><img src="work/kertvellesy-phone.webp" width="585" height="1266" alt="Kertvéllesy concept on a phone" loading="lazy" /></div>
-        <div class="shot wide"><img src="work/kertvellesy-detail.webp" width="1440" height="900" alt="Kertvéllesy concept: the services chapter — design, interiors, project management" loading="lazy" /></div>
+        <figure class="duo">
+          <img class="duo-l" src="work/kertvellesy-duo-light.webp" width="1876" height="1188" alt="New Kertvéllesy website concept on a MacBook and an iPhone" loading="lazy" />
+          <img class="duo-d" src="work/kertvellesy-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
+        </figure>
+        <div class="shot"><img src="work/kertvellesy-detail.webp" width="1440" height="900" alt="Kertvéllesy concept: the services chapter — design, interiors, project management" loading="lazy" /></div>
       </div>
 
       <div class="story">
@@ -276,9 +276,11 @@
       <p class="where">Industrial waste &amp; metal recycling · Győr · 20 sites</p>
 
       <div class="shots">
-        <div class="shot"><img src="work/alcufer-hero.webp" width="1440" height="900" alt="ALCUFER concept homepage: dark hero with the headline and quote button" loading="lazy" /></div>
-        <div class="shot phone"><img src="work/alcufer-phone.webp" width="585" height="1266" alt="ALCUFER concept on a phone" loading="lazy" /></div>
-        <div class="shot wide"><img src="work/alcufer-detail.webp" width="1440" height="900" alt="ALCUFER concept: five-step process from waste to secondary raw material" loading="lazy" /></div>
+        <figure class="duo">
+          <img class="duo-l" src="work/alcufer-duo-light.webp" width="1876" height="1188" alt="New ALCUFER website concept on a MacBook and an iPhone" loading="lazy" />
+          <img class="duo-d" src="work/alcufer-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
+        </figure>
+        <div class="shot"><img src="work/alcufer-detail.webp" width="1440" height="900" alt="ALCUFER concept: five-step process from waste to secondary raw material" loading="lazy" /></div>
       </div>
 
       <div class="story">
@@ -316,9 +318,11 @@
       <p class="where">Ready-mix concrete &amp; building supply store · Tiszafüred</p>
 
       <div class="shots">
-        <div class="shot"><img src="work/jozsa-hero.webp" width="1440" height="900" alt="Józsa concept homepage: headline, concrete order and store buttons, photos of the plant and store" loading="lazy" /></div>
-        <div class="shot phone"><img src="work/jozsa-phone.webp" width="585" height="1266" alt="Józsa concept on a phone" loading="lazy" /></div>
-        <div class="shot wide"><img src="work/jozsa-detail.webp" width="1440" height="900" alt="Józsa concept: concrete price list and delivery cost calculator" loading="lazy" /></div>
+        <figure class="duo">
+          <img class="duo-l" src="work/jozsa-duo-light.webp" width="1876" height="1188" alt="New Józsa website concept on a MacBook and an iPhone" loading="lazy" />
+          <img class="duo-d" src="work/jozsa-duo-dark.webp" width="1876" height="1188" alt="" loading="lazy" />
+        </figure>
+        <div class="shot"><img src="work/jozsa-detail.webp" width="1440" height="900" alt="Józsa concept: concrete price list and delivery cost calculator" loading="lazy" /></div>
       </div>
 
       <div class="story">
